@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, minimal-ui">
+    <title>.reele - profile settings</title>
+    <link rel="icon" type="image/x-icon" href="../assets/reele_min_logo.svg">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/main-style.css">
+    <link rel="stylesheet" href="../css/user-form.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/menu.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/fav.css">
+    <link rel="stylesheet" href="../css/user-profile.css">
+    <link rel="stylesheet" href="../css/tab.css">
+    <script src="../js/jquery-3.7.1.js"></script>
+</head>
+
+<body>
+
+    <header id="headbar">
+        <div id="navbar">
+            <div id="logoContainer">
+                <div id="logo" title="Home..."></div>
+                <div id="title" title="About reele..."></div>
+            </div>
+            <p class="header-title">Profile settings</p>
+            <div id="userinfobx">
+                <div class="clubicon" title="Manage a club(s)..."></div>
+                <div class="navicon" title="Go back..."></div>
+                <div class="dropdown" style="display: none;">
+                    <div class="usermenu">
+                        <div class="usericon" style='background-image: url("")' title=""></div>
+                        <div class="arrbx">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 800 200">
+                                <path class="stg1" d="M425.7,425.7L789.4,62.1c14.2-14.2,14.2-37.2,0-51.4c-14.2-14.2-37.2-14.2-51.4,0L400,348.6
+	                L62.1,10.7c-14.2-14.2-37.2-14.2-51.4,0C3.5,17.8,0,27.1,0,36.4S3.5,55,10.6,62.1l363.7,363.6c6.8,6.8,16.1,10.7,25.7,10.7
+	                C409.6,436.4,418.9,432.5,425.7,425.7z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="dropdown-content">
+                        <a class="list-item">
+                            <p>{{data.username}}</p> <i class="fa-settings"></i>
+                        </a>
+                        <a class="list-item">
+                            <p>Create reele</p> <i class="fa-reeled"></i>
+                        </a>
+                        <a id="list-club" class="list-item">
+                            <p>Manage club(s)</p> <i class="fa-club"></i>
+                        </a>
+                        <a id="list-logout" class="list-item">
+                            <p>Log out</p> <i class="fa-logout"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="selectbar" class="shrink-v-element">
+            <div class="select-content">
+                <div id="srchfor" class="invisible">
+                    <label for="">For:</label>
+                </div>
+                <div class="selectbtgroup invisible">
+                    <button class="selectbt shadow-bottom">
+                        <p>reele</p>
+                    </button>
+                    <button class="selectbt shadow-bottom">
+                        <p>user</p>
+                    </button>
+                    <button class="selectbt shadow-bottom">
+                        <p>club</p>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div id="hPadding"></div>
+
+    <main id="container">
+        <div id="left-sidebar-bx" class="sidebar-bx">
+            <div id="left-slide-bx" class="slide-bx">
+                <div id="left-slide" class="slide">
+                    <div id="l-side-ind" class="side-indicator-bx">
+                        <div class="side-ind-bx">
+                            <div class="side-icon-h-bx club-icon"></div>
+                            <p class="side-ind-tit horizontal-base">Clubs</p>
+                        </div>
+                        <p id="l-side-ind-titl" class="vertical-base side-ind-tit reverse">Clubs</p>
+                    </div>
+
+
+                    <!-- Slider content -->
+                    <div class="slide-content-l">
+                        <div class="slide-row">
+                            <div class="srchbarbx">
+                                <input class="srchinp" type="text" placeholder="Search...">
+                                <button class="srchbt"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <i class="fa-knob-l"></i>
+            </div>
+        </div>
+
+        <div id="slider-content">
+            <div id="profile-bx">
+                <div id="profile-header-linear"></div>
+                <div class="profile-row">
+                    <div id="profile-header">
+                        <div class="user-header centerer">
+                            <div class="replaceBx">
+                                <label id="replaceIcL" style="">
+                                    <div id="replaceMsgBx" class="op-8"><label id="replaceMsgTit"></label></div>
+                                    <div id="user-profile-bx">
+                                        <img id="user-profile"
+                                            src="http://192.168.0.143:8000/u/profiles/picture/{{data.username}}" alt="">
+                                    </div>
+                                    <div class="swap-bubble"></div>
+                                </label>
+                                <div id="replaceInt">
+                                    <button id="acBtDe" class="acBt">✘</button>
+                                    <button id="acBtAc" class="acBt">✓</button>
+                                </div>
+                            </div>
+                            <input id="replace_icon" type="file" name="re_icon"
+                                style="display: none; visibility: none;">
+                            <p class="header-name">{{data.username}}</p>
+                        </div>
+                        <div class="interact_bt_group tab-bar">
+                            <button id="home-tab-bt" class="interact_bt" data_selected_bt="active">Home</button>
+                            <button id="themes-tab-bt" class="interact_bt" data_selected_bt="">Themes</button>
+                            <button id="reeles-tab-bt" class="interact_bt" data_selected_bt="">Reeles</button>
+                            <button id="personal-tab-bt" class="interact_bt" data_selected_bt="">Personal</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="profile-row">
+                    <div class="tab-content">
+                        <div class="tab" id="home-tab-content"></div>
+                        <div class="tab hidden" id="themes-tab-content"></div>
+                        <div class="tab hidden" id="reeles-tab-content"></div>
+                        <div class="tab hidden" id="personal-tab-content">
+                            <div class="inpbx">
+                                <div class="inptx_box">
+                                    <label>E-mail:</label>
+                                    <div class="inptx_cont">
+                                        <i id="email-fav" class="fa-mail"></i>
+                                        <p class="inpPH">{{data.email}}</p>
+                                    </div>
+                                    <div class="tooltipper"></div>
+                                </div>
+                                <div class="inptx_box">
+                                    <label>Password:</label>
+                                    <div class="inptx_cont">
+                                        <i id="password-fav" class="fa-key"></i>
+                                        <input id="password" class="inptx" type="password" name="password"
+                                            placeholder="................">
+                                        <button id="editPass" class="editBt editSign">Edit</button>
+                                    </div>
+                                </div>
+                                <div id="editPassCurr" class="inptx_box sign_element non_sign">
+                                    <label style="color: #982525;">Current Password:</label>
+                                    <div class="inptx_cont">
+                                        <i id="password-fav" class="fa-key"></i>
+                                        <input id="subEditPassword" class="inptx" type="password" name="password"
+                                            placeholder="................">
+                                        <button id="subeditPass" class="editBt">✓</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="right-sidebar-bx" class="sidebar-bx">
+            <div id="right-slide-bx" class="slide-bx">
+                <i class="fa-knob-r"></i>
+                <div id="right-slide" class="slide">
+                    <div id="r-side-ind" class="side-indicator-bx">
+                        <p id="r-side-ind-titl" class="vertical-base side-ind-tit">Your</p>
+                        <div class="side-ind-bx">
+                            <p class="side-ind-tit horizontal-base">Your</p>
+                            <div class="side-icon-h-bx reele-icon"></div>
+                        </div>
+                    </div>
+
+                    <!-- Slider content -->
+                    <div class="slide-content-r">
+                        <div class="slide-row">
+                            <div class="srchbarbx">
+                                <input class="srchinp" type="text" placeholder="Search...">
+                                <button class="srchbt"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <div id="fPadding"></div>
+    <footer class="reele_footer-sidebar">
+        <div id="sidebar-bt-bx-l" class="sidebar-bt-row">
+            <div class="sidebar-bt-bx">
+                <button id="left-side-bt" class="side-bt">
+                    <img class="side-bt-icon" src="../assets/club-icon.svg" alt="">
+                    <img id="left-side-icon-a" class="side-bt-icon-a" src="../assets/club-icon-a.svg" alt="">
+                </button>
+            </div>
+        </div>
+        <div class="footbar">
+            <i class="fa-knob-mini"></i>
+            <div class="footbar-content"></div>
+        </div>
+        <div id="sidebar-bt-bx-r" class="sidebar-bt-row">
+            <div id="right-side-bt" class="sidebar-bt-bx">
+                <button id="right-side-bt" class="side-bt">
+                    <img class="side-bt-icon" src="../assets/reele-icon.svg" alt="">
+                    <img id="right-side-icon-a" class="side-bt-icon-a" src="../assets/reele-icon-a.svg" alt="">
+                </button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- scripts-->
+    <script src="../js/FRvalidator.js"></script>
+    <script src="../js/personalTabHandler.js"></script>
+    <script src="../js/tab-switcher.js"></script>
+    <script src="../js/profileActH.js"></script>
+    <script src="../js/colorGenerator.js"></script>
+    <script src="../js/testIndicator.js"></script>
+    <script src="../js/sidebarMech.js"></script>
+    <script src="../js/mouseDrag.js"></script>
+    <script src="../mini-router/redirect.js"></script>
+    <script src="../mini-router/pHandler.js"></script>
+    <script src="../mini-router/routescript.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>
