@@ -1,0 +1,1 @@
+// Add a feature that allows to the user to copy/paste from type="password" input.
