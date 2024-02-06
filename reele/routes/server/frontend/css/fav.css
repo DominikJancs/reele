@@ -1,0 +1,112 @@
+/* Fav-library */
+
+.fa-mail {
+    background-image: url('../custom-feather/mail.svg');
+}
+
+.fa-book {
+    background-image: url('../custom-feather/book.svg');
+}
+
+.fa-key {
+    background-image: url('../custom-feather/key.svg');
+}
+
+.fa-alert {
+    background-image: url('../custom-feather/alert-circle.svg');
+    animation: blinker steps(4, start) infinite;
+    animation-duration: 0.6s;
+}
+
+.fa-logout {
+    background-image: url('../custom-feather/log-out.svg');
+}
+
+.fa-settings {
+    background-image: url('../custom-feather/settings.svg');
+}
+
+.fa-reeled {
+    background-image: url('../custom-feather/reeled.svg');
+}
+
+.fa-club {
+    background-image: url('../assets/GROUP.webp');
+    border: 1px solid var(--pale-red);
+    border-radius: 50%;
+}
+
+.fa-srch-gray {
+    background-image: url('../custom-feather/search-gray.svg');
+}
+
+.fa-reele {
+    background-image: url('../custom-feather/reele-fav.svg');
+}
+
+.fa-knob-l, .fa-knob-r, .fa-knob-mini {
+    background-image: url('../custom-feather/knob.svg');
+    background-position: bottom;
+    background-size: contain;
+    background-repeat: no-repeat;  
+    margin: 0;
+}
+
+.fa-knob-l, .fa-knob-r {
+    height: 3rem;
+    width: 3rem;
+}
+
+.fa-knob-l {transform: rotate(90deg);}
+
+.fa-knob-r {transform: rotate(-90deg);}
+
+.fa-knob-mini {
+    height: 1rem;
+    width: 1.5rem;
+}
+
+.fa-mail, .fa-book, .fa-key , .fa-alert, .fa-logout, .fa-settings, .fa-reeled, .fa-club, .fa-srch-gray, .fa-reele {
+    display: flex;
+    height: 24px;
+    width: 24px;
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin: 3px;
+    opacity: .9;
+}
+
+.fa-mail, .fa-book, .fa-key {
+    animation-name: fav-floating-vertical;
+}
+
+.fa-logout {
+    animation-name: fav-floating-horizontal;
+}
+
+.fa-mail, .fa-book, .fa-key, .fa-logout{
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes blinker {
+    to {
+        visibility: hidden;
+    }
+}
+
+@keyframes fav-floating-vertical {
+    0% { transform: translateY(2px); }
+    50%  { transform: translateY(0px); }
+    100%   { transform: translateY(2px); }    
+}
+
+@keyframes fav-floating-horizontal {
+    0% { transform: translateX(2px); }
+    50%  { transform: translateX(0); }
+    100%   { transform: translateX(2px); }    
+}
+
+/* Source: https://feathericons.com/ */

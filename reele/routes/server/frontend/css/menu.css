@@ -1,0 +1,105 @@
+:root {
+  --list-item-h: 3rem;
+  --border-default-width: 2px;
+}
+
+#list-club {
+  display: none;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.list-item {
+  display: flex;
+  align-items: center;
+  height: var(--list-item-h);
+}
+
+.dropdown-content {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  height: 0px;
+  background-color: var(--bright-white);
+  right: 0;
+  min-width: 200px;
+  border-radius: 15px;
+  border: var(--border-default-width) solid var(--brightest-gray);
+  overflow: hidden;
+  margin: 2px 0px;
+  box-shadow: var(--light-shadow);
+  transition: all .5s ease;
+  visibility: hidden;
+  z-index: 5;
+}
+
+.dropdown-content .list-item p {
+  transition: all .5s ease;
+  color: var(--pale-red);
+}
+
+.dropdown-content .list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 15px;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: background .4s;
+}
+
+.dropdown:hover .dropdown-content {
+  visibility: visible;
+  height: calc((3 * var(--list-item-h)) + (2 * var(--border-default-width)));
+}
+
+.dropdown-content .list-item:hover {
+  background-color: var(--paste-gray);
+  --webkit-transition: all .2s;
+}
+
+.dropdown-content .list-item:hover p {
+  filter: brightness(126%);
+  --webkit-transition: all .2s;
+}
+
+.dropdown:hover .arrbx {
+  transform: rotate(-180deg);
+  --webkit-transition: all .2s;
+}
+
+.arrbx {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: fit-content;
+  width: fit-content;
+  transition: transform .8s ease-in-out;
+  opacity: .85;
+}
+
+@media screen and (max-width: 600px) {
+  .arrbx {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .dropdown:hover .dropdown-content {
+    height: calc((4 * var(--list-item-h)) + (2 * var(--border-default-width)));
+  }
+
+  #list-club {
+    display: flex;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .dropdown {display: none; width: 0;}
+}

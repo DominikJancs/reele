@@ -1,0 +1,338 @@
+#hPadding {
+    display: flex;
+    height: 5rem;
+    width: 100%;
+}
+
+#headbar {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    height: fit-content;
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+    background-color: var(--bright-white);
+    z-index: 4;
+    box-shadow: var(--light-shadow-out);
+    -webkit-box-shadow: var(--light-shadow-out);
+    -moz-box-shadow: var(--light-shadow-out);
+    z-index: 5;
+}
+
+#navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 5rem;
+    width: 100%;
+    padding: 0px 65px;
+    overflow: visible;
+    border-bottom: 3px solid var(--gray);
+    gap: 20px;
+}
+
+#navbar.shrinked,
+#selectbar.shrinked {
+    height: 0rem;
+    overflow: hidden;
+    border: none;
+}
+
+.bottom-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: fit-content;
+    height: 5rem;
+    width: 100%;
+    pointer-events: none
+}
+
+#selectbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 3rem;
+    width: 100%;
+    overflow: visible;
+}
+
+.select-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 6px 5px;
+    overflow: hidden;
+    gap: 20px;
+}
+
+.selectbtgroup {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: fit-content;
+    gap: 20px;
+}
+
+.selectbt {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: fit-content;
+    min-width: 6rem;
+    border-radius: 20px;
+    background-color: var(--brighter-gray);
+    border: 3px solid var(--pale-red);
+    outline: none;
+}
+
+#srchfor {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: fit-content;
+    gap: 2px;
+}
+
+#srchfor label {
+    color: var(--gray);
+}
+
+.selectbt p {
+    font-weight: 500;
+    font-size: 20px;
+    color: var(--bright-white);
+}
+
+.header-title {
+    white-space: nowrap;
+    text-align: center;
+    color: var(--pale-red);
+    font-size: 30px;
+    opacity: .8;
+    overflow: hidden;
+}
+
+#logoContainer {
+    display: flex;
+    align-items: center;
+    height: fit-content;
+    width: fit-content;
+    gap: 16px;
+}
+
+#logo {
+    height: 2.5rem;
+    width: 2.5rem;
+    background-image: url('../assets/reele_logo.svg');
+}
+
+#title {
+    height: 4rem;
+    width: 7rem;
+    background-image: url('../assets/reele_title.svg');
+}
+
+#title,
+#logo {
+    cursor: pointer;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+#logo {
+    border-radius: 50%;
+}
+
+#logo:hover {
+    box-shadow: 0px 0px 11px 1px var(--bright-red);
+}
+
+#title:hover,
+#logo:hover,
+.selectbt:hover,
+.srchbt:hover {
+    filter: brightness(126%);
+}
+
+#interact_tit {
+    padding: 0px 15px;
+}
+
+.srchbarbx {
+    display: flex;
+    align-items: center;
+    width: 58rem;
+    height: 45px;
+    background-color: var(--bright-white);
+    color: var(--bright-white);
+    padding: 0px 10px;
+    border-radius: 50rem;
+    overflow: hidden;
+    border: 2px solid var(--brightest-gray);
+    overflow: hidden;
+}
+
+#userinfobx {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: fit-content;
+    gap: 20px;
+}
+
+.usermenu {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    z-index: 1;
+}
+
+.usermenu:hover .usericon {
+    filter: brightness(126%);
+}
+
+.srchinp {
+    outline: none;
+    border: none;
+    height: 45px;
+    width: 100%;
+    color: var(--mid-gray);
+    background-color: transparent;
+    padding: 0px 6px;
+    font-weight: bold;
+}
+
+.srchinp:hover {
+    filter: brightness(126%);
+    color: var(--pale-red);
+}
+
+.srchbt {
+    outline: none;
+    border: none;
+    background-color: transparent;
+    height: 45px;
+    width: 45px;
+    background-image: url('../assets/search.svg');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 1.6rem;
+    background-origin: content-box;
+}
+
+.clubicon {
+    background-image: url('../assets/GROUP.webp');
+    cursor: pointer;
+}
+
+.clubicon:hover {
+    filter: brightness(126%);
+}
+
+.navicon {
+    display: flex;
+    background-image: url('../assets/arrow-left.png');
+    height: 3.5rem;
+    width: 3.5rem;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 3.5rem;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+    cursor: pointer;
+    transition: all 2s ease;
+}
+
+.navicon:hover {
+    animation-name: floating-horizontal;
+}
+
+@keyframes floating-horizontal {
+    0% { transform: translateX(0px); }
+    50%  { transform: translateX(4px); }
+    100%   { transform: translateX(0px); }    
+}
+
+.usericon,
+.clubicon {
+    display: flex;
+    height: 3.5rem;
+    width: 3.5rem;
+    background-color: var(--mid-gray-t);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 3.5rem;
+    border-radius: 50%;
+    border: 3px solid var(--pale-red);
+}
+
+/* transition all elements */
+.usericon,
+.clubicon,
+#logo,
+#title,
+#selectbar,
+#navbar,
+.srchinp,
+.selectbt,
+.srchbt {
+    transition: all .5s ease;
+}
+
+.srchbarbx, .shadow-bottom {
+    box-shadow: var(--light-shadow);
+    -webkit-box-shadow: var(--light-shadow);
+    -moz-box-shadow: var(--light-shadow);
+}
+
+/* Invisible horizontal elements */
+#title.shrink-h-element {
+    width: 0;
+    margin: 0;
+}
+
+/* Invisible vertical elements */
+
+#selectbar.shrink-v-element {
+    height: 0;
+    margin: 0;
+}
+
+/*Invisible*/
+
+.selectbtgroup.invisible {
+    display: none;
+}
+
+@media screen and (max-width: 600px) {
+    #navbar {padding: 0px 15px;}
+
+    #logo {width: 0;}
+
+    .clubicon {display: none;}
+
+    .usericon,
+    .navicon {
+        height: 3rem;
+        width: 3rem;
+        background-size: 3rem;
+    }
+
+    #logoContainer {gap: 0;}
+
+    .usermenu {display: block;}
+}
+  
+  @media screen and (max-width: 1200px) {
+    .clubicon {display: none;}
+  }

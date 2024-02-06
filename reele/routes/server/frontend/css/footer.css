@@ -1,0 +1,89 @@
+/* Footer */
+#fPadding {
+    display: flex;
+    height: 5.5rem;
+    width: 100%;
+}
+
+.reele_footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    height: 3.5rem;
+    width: 100%;
+    bottom: 0;
+    overflow: auto;
+    background-color: var(--bright-white);
+    box-shadow: var(--light-shadow);
+    -webkit-box-shadow: var(--light-shadow);
+    -moz-box-shadow: var(--light-shadow);
+    z-index: 4;
+}
+
+.footer_cont, .footer_part  {
+    display: flex;
+    height: fit-content;
+    width: fit-content;
+    align-items: center;
+}
+
+.footer_cont {
+    gap: 25px;
+}
+
+.footer_part {
+    gap: 10px;
+}
+
+.stg0 {
+    fill: var(--pale-red);
+    opacity: .9;
+}
+
+.stg1 {
+    opacity: .6;
+}
+
+.footbar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: fit-content;
+    min-width: 12.5rem;
+    cursor: pointer;
+}
+
+.footbar-content {
+    display: flex;
+    flex-direction: column;
+    height: 4.5rem;
+    width: 100%;
+    background-color: var(--bright-white);
+    background-image: url('../assets/wood-texture-v.webp');
+    background-position: fixed;
+    background-size: cover;
+    border-radius: 35px 35px 0 0;
+    border-style: solid;
+    border-color: var(--gray);
+    border-width: 3px 3px 0 3px;
+    box-shadow: var(--light-shadow);
+    -webkit-box-shadow: var(--light-shadow);
+    -moz-box-shadow: var(--light-shadow);
+    bottom: 0;
+}
+
+@media screen and (max-width: 600px) {
+    .footer_cont {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+
+    #reele_lang_tit {display: none;}
+}
+
+@media only screen and (min-width: 1200px) {
+    .footbar {display: none; height: 0;}
+    #fPadding {display: none; height: 0;}
+}
