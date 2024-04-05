@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, minimal-ui">
+    <title>.reele - {{reeleData.title}}</title>
+    <link rel="icon" type="image/x-icon" href="../assets/reele_min_logo.svg">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/main-style.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/menu.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/fav.css">
+    <link rel="stylesheet" href="../css/post.css">
+    <link rel="stylesheet" href="../css/reeleItem.css">
+    <link rel="stylesheet" href="../css/reele.css">
+    <link rel="stylesheet" href="../pdf/css/pdfPrev.css">
+    <script src="../js/jquery-3.7.1.js"></script>
+    <script src="../pdf/js/pdf.min.js"></script>
+    <script src="../pdf/js/pdf.worker.js"></script>
+</head>
+
+<body data-reele="{{reeleData.title}}">
+
+    <header id="headbar">
+        <div id="navbar">
+            <div id="logoContainer">
+                <div id="logo" title="Home..."></div>
+                <div id="title" title="About reele..."></div>
+            </div>
+            <div id="club_inf_bx">
+                <p id="header-pages" class="header-title"></p>
+            </div>
+            <div id="userinfobx">
+                <div class="navicon" title="Go back..."></div>
+            </div>
+        </div>
+        <div id="selectbar" class="shrink-v-element">
+            <div class="select-content">
+                <div id="srchfor" class="invisible">
+                    <label for="">For:</label>
+                </div>
+                <div class="selectbtgroup invisible">
+                    <button class="selectbt shadow-bottom">
+                        <p>reele</p>
+                    </button>
+                    <button class="selectbt shadow-bottom">
+                        <p>user</p>
+                    </button>
+                    <button class="selectbt shadow-bottom">
+                        <p>club</p>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div id="hPadding-c"></div>
+
+    <main id="container">
+        <div id="slider-content-doc">
+            <div id="doc-bx">
+                <div id="header-linear"></div>
+                <div class="doc-header">
+                    <div class="doc-split">
+                        <img src="http://192.168.0.143:8000/posts/cover/{{reeleData.title}}" id="reele-cover">
+                        <div class="reele-interactbx">
+                            <div class="reele-interact-row">
+                                <div id="reele-title">
+                                    <p class="header-title">{{reeleData.title}}</p>
+                                    <p>By: {{reeleData.by}}</p>
+                                </div>
+                            </div>
+                            <div class="reele-interact-row">
+                                <div id="reeleBTstatic" class="reeleInteractbutton" data-post="{{reeleData.title}}"><img
+                                        class="reeleInteractIcon" src="{{reele}}" alt=""></div>
+                                <div class="reeleInteractbutton"><img class="reeleInteractIcon"
+                                        src="../assets/clipboard.svg" alt=""></div>
+                                <div id="flagBTstatic" class="reeleInteractbutton" data-post="{{reeleData.title}}"><img class="reeleInteractIcon"
+                                src="{{flag}}" alt=""></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="doc-split-r">
+                        <div class="reele-interactbx-r">
+                            <div class="reele_interact_inf">
+                                <div class="reele-interact-row">
+                                    <p>Shared: {{reeleData.share}}</p>
+                                </div>
+                                <div class="reele-interact-row">
+                                    <div class="reele-interact-ind"><i class="fa-big-brother"></i>
+                                        <p>{{reeleData.views}}</p>
+                                    </div>
+                                    <span class="line-mini"></span>
+                                    <div class="reele-interact-ind"><i class="fa-reele-mini"></i>
+                                        <p>{{reeleData.reeles}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="reele-interact-row">
+                                <div id="classic" class="genre_item">
+                                    <div class="genre_pro">
+                                        <label>{{reeleData.genre}}</label>
+                                    </div>
+                                </div>
+                                <a href="http://192.168.0.143:8000/posts/file/{{reeleData.title}}" download>
+                                    <div class="reeleInteractbutton"><img class="reeleInteractIcon"
+                                            src="../assets/download.svg" alt=""></div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="doc-author">
+                    <p>From: </p>
+                    <img id="clubProfile" class="profile_bx" src="http://192.168.0.143:8000/c/clubprofiles/picture/{{club}}" data-club="{{club}}" alt="">
+                    <p>{{club}}</p>
+                    <div id="arrow-t"></div>
+                    <img class="profile_bx" src="http://192.168.0.143:8000/users/profilepicture/{{author}}" alt="">
+                    <p>{{author}}</p>
+                </div>
+                <div id="prev_page"></div>
+            </div>
+            <div class="content-footer">
+                <div class="content-footer-s">
+                    <div class="thoughtsbox">
+                        <div class="thoughts_inp_bx">
+                            {{#if exist}}<div class="usericon"
+                                style='background-image: url("http://192.168.0.143:8000/u/profiles/picture/{{data.username}}")'
+                                title="{{data.username}}"></div>
+                            {{else}}
+                            <div class="usericon" style='background-image: url("../assets/user.webp")'
+                                title="Your choice..."></div>
+                            {{/if}}
+                            <div class="page_index hidden">
+                                <div class="indexBX" data-pages="0"></div>
+                                <div class="indexCL"></div>
+                            </div>
+                            <input type="text" name="thought_inp" id="thought_inp"
+                                placeholder="Give a thought to the reel...">
+                            <button id="sendThought"></button>
+                            <button id="openThoughts"></button>
+                        </div>
+
+                        <div id="thoughts_msg" class="thoughts_msg_bx hidden">
+                            <div class="thoughts_item_prev">
+                                <div class="thought_row">
+                                    <div class="user_thought_inf">
+                                        {{#if exist}}<div class="usericon"
+                                            style='background-image: url("http://192.168.0.143:8000/u/profiles/picture/{{data.username}}")'
+                                            title="{{data.username}}"></div>
+                                        {{/if}}
+                                        <div class="thought_inf">
+                                            <label class="thought_username" for="">{{data.username}}</label>
+                                            <p class="thought_thoughted" id="thoughted_msg"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="thought_row">
+                                    <label class="thought_context" id="context_msg" for=""></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="thoughts_content"></div>
+                    </div>
+                </div>
+                <div class="content-footer-s">
+
+                </div>
+            </div>
+        </div>
+
+        <div id="right-sidebar-bx" class="sidebar-bx">
+            <div id="right-slide-bx" class="slide-bx">
+                <i class="fa-knob-r"></i>
+                <div id="right-slide" class="slide">
+                    <div id="r-side-ind" class="side-indicator-bx">
+                        <p id="r-side-ind-titl" class="vertical-base side-ind-tit">Bookmarks</p>
+                        <div class="side-ind-bx">
+                            <p class="side-ind-tit horizontal-base">Bookmarks</p>
+                            <div class="side-icon-h-bx bookmark-icon"></div>
+                        </div>
+                    </div>
+
+                    <!-- Slider content -->
+                    <div class="slide-content-r">
+                        <div class="slide-row">
+                            <div class="srchbarbx">
+                                <input class="srchinp" type="text" placeholder="Search...">
+                                <button class="srchbt"></button>
+                            </div>
+                        </div>
+                        <div id="bookmarks" class="slide-content"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <div id="fPadding"></div>
+    <footer class="reele_footer-sidebar">
+        <div id="sidebar-bt-bx-l" class="sidebar-bt-row">
+        </div>
+        <div class="footbar">
+            <i class="fa-knob-mini"></i>
+            <div class="footbar-content"></div>
+        </div>
+        <div id="sidebar-bt-bx-r" class="sidebar-bt-row">
+            <div id="right-side-bt" class="sidebar-bt-bx">
+                <button id="right-side-bt" class="side-bt">
+                    <img class="side-bt-icon" src="../assets/bookmark-icon.svg" alt="">
+                    <img id="right-side-icon-a" class="side-bt-icon-a" src="../assets/bookmark-icon-a.svg" alt="">
+                </button>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/colorGenerator.js"></script>
+    <script src="../js/testIndicator_2.js"></script>
+    <script src="../js/sidebarMech.js"></script>
+    <script src="../js/onscroll.js"></script>
+    <script src="../js/searchbarMech.js"></script>
+    <script src="../js/thoughtInteract.js"></script>
+    <script src="../js/characterCounter.js"></script>
+    <script src="../js/thoughtGenerator.js"></script>
+    <script src="../pdf/js/pdf.loader.document.js"></script>
+    <script src="../mini-router/redirect.js"></script>
+    <script src="../mini-router/routescript.js"></script>
+    <script src="../mini-router/reeleInteract.js"></script>
+    <script src="../mini-router/reeleH.js"></script>
+    <script src="../mini-router/postThought.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

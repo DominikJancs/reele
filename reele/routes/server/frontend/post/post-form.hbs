@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, minimal-ui">
+    <title>.reele - club settings</title>
+    <link rel="icon" type="image/x-icon" href="../assets/reele_min_logo.svg">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/main-style.css">
+    <link rel="stylesheet" href="../css/user-form.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/menu.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/fav.css">
+    <link rel="stylesheet" href="../css/post.css">
+    <link rel="stylesheet" href="../css/tab.css">
+    <link rel="stylesheet" href="../css/bt.css">
+    <link rel="stylesheet" href="../pdf/css/pdfPrev.css">
+    <script src="../js/jquery-3.7.1.js"></script>
+    <script src="../pdf/js/pdf.min.js"></script>
+    <script src="../pdf/js/pdf.worker.js"></script>
+</head>
+
+<body>
+
+    <header id="headbar">
+        <div id="navbar">
+            <div id="logoContainer">
+                <div id="logo" title="Home..."></div>
+                <div id="title" title="About reele..."></div>
+            </div>
+            <div id="club_inf_bx">
+                <p class="header-title">Publish to </p>
+                <div class="clubprofile"
+                    style='background-image: url("http://192.168.0.143:8000/c/clubprofiles/picture/{{data.clubname}}")'
+                    title="{{data.clubname}}"></div>
+                <p class="header-title">{{data.clubname}}</p>
+            </div>
+            <div id="userinfobx">
+                <div class="navicon" title="Go back..."></div>
+            </div>
+        </div>
+        <div id="selectbar" class="shrink-v-element">
+            <div class="select-content">
+                <div id="srchfor" class="invisible">
+                    <label for="">For:</label>
+                </div>
+                <div class="selectbtgroup invisible">
+                    <button class="selectbt shadow-bottom">
+                        <p>reele</p>
+                    </button>
+                    <button class="selectbt shadow-bottom">
+                        <p>user</p>
+                    </button>
+                    <button class="selectbt shadow-bottom">
+                        <p>club</p>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div id="hPadding"></div>
+
+    <main id="container">
+        <div id="slider-content" class="w-slider">
+            <div id="post-bx">
+                <div id="post_up">
+                    <div id="post-row">
+                        <select name="" id="genre_menu" data-club="{{data.clubname}}">
+                            <option id="" value="" disabled selected>Choose a genre...</option>
+                        </select>
+                    </div>
+                    <div id="post-row">
+                        <label id="postcover" for="p_cover">
+                            <div id="post_cover" title="Choose a cover...">
+                                <div id="replaceMsgBx" class="op-8"><label id="replaceMsgTit"></label></div>
+                                <div id="cover_title" class="">Choose a cover...</div>
+                            </div>
+                        </label>
+                        <input id="p_cover" type="file" name="p_cover" style="display: none; visibility: none;">
+                    </div>
+                    <div id="post-row">
+                        <label id="postcover" for="p_document">
+                            <div id="up_document">Choose a .pdf file</div>
+                        </label>
+                        <input id="p_document" type="file" name="p_document" accept="application/pdf"
+                            style="display: none; visibility: none;">
+                    </div>
+                    <div id="post-row">
+                        <div class="inptx_cont">
+                            <i id="documentumname-fav" class="fa-book"></i>
+                            <input id="documentumname" class="inptx" type="text" name="documentumname"
+                                placeholder="Document Name...">
+                        </div>
+                    </div>
+                    <div id="post-row">
+                        <div class="inptx_cont">
+                            <i id="by-fav" class="fa-book"></i>
+                            <input id="by" class="inptx" type="text" name="by" placeholder="By (Optional)...">
+                        </div>
+                    </div>
+                </div>
+                <div id="up_preview">
+                    <div id="post-row">
+                        <div id="previewbx">
+                            <div id="prevrow">
+                                <p id="prew_title">Preview</p>
+                                <div id="pageDisp" class="pageindicator deabsol hidden"></div>
+                            </div>
+                            <div id="prev_page"></div>
+                        </div>
+                    </div>
+                    <div id="post-row">
+                        <button id="publish_post">Publish</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- scripts-->
+    <script src="../js/characterCounter.js"></script>
+    <script src="../js/FRvalidator.js"></script>
+    <script src="../js/imgPHandler.js"></script>
+    <script src="../js/docPHandler.js"></script>
+    <script src="../pdf/js/pdf.loader.prev.js"></script>
+    <script src="../mini-router/redirect.js"></script>
+    <script src="../mini-router/routescript.js"></script>
+    <script src="../mini-router/postHandler.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>
