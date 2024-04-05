@@ -1,6 +1,13 @@
 CREATE DATABASE reele_db
     DEFAULT CHARACTER SET = 'utf8' COLLATE utf8_hungarian_ci;
 
+CREATE TABLE IF NOT EXISTS admins (
+    admin_id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    email VARCHAR(50) NOT NULL UNIQUE,
+    admin_name VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL
+) Engine=Innodb;  
+
 CREATE TABLE IF NOT EXISTS users (
     user_id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
     user_name VARCHAR(50) NOT NULL UNIQUE,
@@ -26,6 +33,7 @@ CREATE TABLE IF NOT EXISTS bookmarks (
 ) Engine=Innodb;  
 
 CREATE TABLE IF NOT EXISTS joins (
+    j_cast_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     user_id INT NOT NULL,
     club_id INT NOT NULL
 ) Engine=Innodb;  
@@ -36,8 +44,16 @@ CREATE TABLE IF NOT EXISTS views (
 ) Engine=Innodb;  
 
 CREATE TABLE IF NOT EXISTS reeles (
+    r_cast_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     user_id INT NOT NULL,
     post_id INT NOT NULL
+) Engine=Innodb;  
+
+CREATE TABLE IF NOT EXISTS flags (
+    f_cast_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    post_id INT NOT NULL,
+    club_id INT NOT NULL
 ) Engine=Innodb;  
 
 CREATE TABLE IF NOT EXISTS thoughts (
@@ -64,12 +80,12 @@ CREATE TABLE IF NOT EXISTS tag_log (
 CREATE TABLE IF NOT EXISTS posts (
     post_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     author_id INT NOT NULL,
-    source_id INT NOT NULL,
+    author_name VARCHAR(50) NOT NULL,
     post_title VARCHAR(255) NOT NULL,
     by_title VARCHAR(50) NOT NULL,
     create_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    cover_path VARCHAR(255) NOT NULL,
     file_path VARCHAR(255) NOT NULL,
-    page_index INT NOT NULL,
     genre_id INT NOT NULL,
     club_id INT NOT NULL
 ) Engine=Innodb;  
@@ -104,6 +120,23 @@ CREATE TABLE IF NOT EXISTS libra_lib (
 CREATE TABLE IF NOT EXISTS genre_lib (
     genre_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     genre VARCHAR(255) NOT NULL
+) Engine=Innodb;  
+
+
+--modificated
+
+CREATE TABLE IF NOT EXISTS posts (
+    post_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    author_id INT NOT NULL,
+    post_title VARCHAR(255) NOT NULL,
+    by_title VARCHAR(50) NOT NULL,
+    create_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    page_index INT NOT NULL,
+    author_name VARCHAR(50) NOT NULL,
+    cover_path VARCHAR(255) NOT NULL,
+    file_path VARCHAR(255) NOT NULL,
+    genre_id INT NOT NULL,
+    club_id INT NOT NULL
 ) Engine=Innodb;  
 
 ------------------------------------------------------------------------------------------------------------------------------------------------
@@ -163,3 +196,44 @@ BEGIN
 END//
 
 DELIMITER;
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+--Values
+
+--INSERT (club_name, )
+
+
+INSERT INTO
+    admins (email, admin_name, password)
+VALUES
+    ("admin1@reele.com", "admin1", "c!zmPey4XB-nTBS" )
+
+INSERT INTO
+    genre_lib (genre_id, genre)
+VALUES
+    (1, 'classic' ),
+    (2, 'action'),
+    (3, 'comedy'),
+    (4, 'crime'),
+    (5, 'drama'),
+    (6, 'sci-fi'),
+    (7, 'western'),
+    (8, 'teaching'),
+    (9, 'nature');
+
+INSERT INTO
+    genre_lib (genre_id, genre)
+VALUES
+    (1, 'classic' ),
+    (2, 'action'),
+    (3, 'comedy'),
+    (4, 'crime'),
+    (5, 'drama'),
+    (6, 'sci-fi'),
+    (7, 'western'),
+    (8, 'teaching'),
+    (9, 'nature');
+
+INSERT users (user_id, email, password) 
+    VALUES
