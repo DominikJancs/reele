@@ -24,7 +24,7 @@ async function iconHandle(req, res, next) {
             fileSize: 2 * 1024 * 1024 //2MB max
         },
         fileFilter: function(_req, file, cb){
-            chckFile(file, cb);
+            chckFile(file, cb, /jpeg|jpg|png/);
         }
     });
 
@@ -32,7 +32,7 @@ async function iconHandle(req, res, next) {
     conn.query(sql, [userId], (err, result) => {
         if (err) throw err;
         if (result.length > 0) {
-            var dir = `routes/server/media/icons/${result[0].user_name}`;
+            var dir = `media/icons/${result[0].user_name}`;
             if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
             else fsExtra.emptyDirSync(dir);
 
@@ -40,7 +40,7 @@ async function iconHandle(req, res, next) {
                 if (err) return res.status(500).json(err);
                 
                 const fileName = `${user}_${Date.now()}.png`;
-                await sharp(req.file.buffer).png().resize({ width: 256, height: 256 }).toFile(`routes/server/media/icons/${user}/${fileName}`);
+                await sharp(req.file.buffer).png().resize({ width: 256, height: 256 }).toFile(`media/icons/${user}/${fileName}`);
                 const iconPth = `media/icons/${result[0].user_name}/${fileName}`;
 
                 req.body.upcdata = {
@@ -61,13 +61,12 @@ async function iconHandle(req, res, next) {
     });
 }
 
-function chckFile(file, cb) {
-    const allowedEXT = /jpeg|jpg|png/;
+function chckFile(file, cb, ext) {
     const filename = file.originalname;
-    const ext = allowedEXT.test(pth.extname(filename).toLowerCase());
-    const mime = allowedEXT.test(file.mimetype);
+    const extension = ext.test(pth.extname(filename).toLowerCase());
+    const mime = ext.test(file.mimetype);
 
-    if (ext && mime && filename.length > 0) return cb(null, true);
+    if (extension && mime && filename.length > 0) return cb(null, true);
     else cb(new Error("The file isn't an image"));
 }
 

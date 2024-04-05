@@ -31,10 +31,10 @@ async function pCH(req, res) {
                             conn.query(sql, [hash, userId], (err, result) => {
                                 if (err) res.status(501);
                             });
-                            res.status(201);
                         });
                     }
                 });
+                res.status(201).json({status: 201});
             }
         });
     }

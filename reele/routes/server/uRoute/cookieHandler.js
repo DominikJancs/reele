@@ -11,8 +11,8 @@ async function cookieSet(req, res) {
         expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
         httpOnly: true
     };
-    res.cookie("token", token, opt);
-    res.status(201).json(req.body.msg);
+    res.cookie(req.admin ? "admin" : "token", token, opt);
+    res.status(201).json({msg: req.body.msg, name: req.admin ? req.body.upcdata.name : null});
 }
 
 exports.cookieSet = cookieSet;

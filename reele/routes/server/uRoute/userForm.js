@@ -38,42 +38,45 @@ async function regU(req, res, next) {
 }
 /*---------Login--------------------------------------------------------------------------------------*/
 async function signU(req, res, next) {
-    try {
-        const { email, password } = req.body;
-        var conn = mysql.createConnection(setup.database);
-        conn.connect(function (err) {
-            if (err) throw err;
-        });
+    if (!req.admin) {
+        try {
+            const { email, password } = req.body;
+            var conn = mysql.createConnection(setup.database);
+            conn.connect(function (err) {
+                if (err) throw err;
+            });
 
-        const sql = "SELECT * FROM users WHERE email = ?";
-        conn.query(sql, [email], (err, result) => {
-            if (err) throw err;
-            if (result.length > 0) {
-                bcrypt.compare(password.toString(), result[0].password, (err, response) => {
-                    if (err) throw err;
-                    if (response) {
-                        req.body.upcdata = {
-                            userid: result[0].user_id,
-                            username: result[0].user_name,
-                            email: result[0].email,
-                            icon: result[0].u_icon_path
+            const sql = "SELECT * FROM users WHERE email = ?";
+            conn.query(sql, [email], (err, result) => {
+                if (err) throw err;
+                if (result.length > 0) {
+                    bcrypt.compare(password.toString(), result[0].password, (err, response) => {
+                        if (err) throw err;
+                        if (response) {
+                            req.body.upcdata = {
+                                userid: result[0].user_id,
+                                username: result[0].user_name,
+                                email: result[0].email,
+                                icon: result[0].u_icon_path
+                            }
+                            req.body.msg = "Successfully logged!";
+                            next();
                         }
-                        req.body.msg = "Successfully logged!";
-                        next();
-                    }
-                    else {
-                        res.status(401).send("Password not matched!");
-                    }
-                });
-            }
-            else {
-                res.status(401).send("Non-registered account!");
-            }
-        });
+                        else {
+                            res.status(401).send("Password not matched!");
+                        }
+                    });
+                }
+                else {
+                    res.status(401).send("Non-registered account!");
+                }
+            });
+        }
+        catch (error) {
+            res.status(500).json({ msg: "Something went wrong!" });
+        }           
     }
-    catch (error) {
-        res.status(500).json({ msg: "Something went wrong!" });
-    }
+    else next();
 }
 /*---------------------------------------------------------------------------------------------------*/
 
