@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="../css/fav.css">
     <link rel="stylesheet" href="../css/user-profile.css">
     <link rel="stylesheet" href="../css/tab.css">
+    <link rel="stylesheet" href="../css/bt.css">
     <script src="../js/jquery-3.7.1.js"></script>
 </head>
 
@@ -102,6 +103,26 @@
                                 <button class="srchbt"></button>
                             </div>
                         </div>
+                        <div class="slide-content-s">
+                            <div class="slider-content-header">
+                                <div class="slider-content-title-bx">
+                                    <div class="side-icon-bx club-icon-gray"></div>
+                                    <p class="side-ind-tit">Joined</p>
+                                </div>
+                            </div>
+                            <span class="line-vertical-b"></span>
+                            <div id="joined-clubs" class="clubs-disp-bx"></div>
+                        </div>
+                        <div class="slide-content-s">
+                            <div class="slider-content-header">
+                                <div class="slider-content-title-bx">
+                                    <p class="side-ind-tit">Top 5</p>
+                                    <div class="side-icon-bx club-icon-gray"></div>
+                                </div>
+                            </div>
+                            <span class="line-vertical-b"></span>
+                            <div id="top5-clubs" class="clubs-disp-bx"></div>
+                        </div>
                     </div>
                 </div>
                 <i class="fa-knob-l"></i>
@@ -110,7 +131,7 @@
 
         <div id="slider-content">
             <div id="profile-bx">
-                <div id="profile-header-linear"></div>
+                <div id="header-linear"></div>
                 <div class="profile-row">
                     <div id="profile-header">
                         <div class="user-header centerer">
@@ -156,7 +177,7 @@
                                     <div class="tooltipper"></div>
                                 </div>
                                 <div class="inptx_box">
-                                    <label>Password:</label>
+                                    <label>Change password to:</label>
                                     <div class="inptx_cont">
                                         <i id="password-fav" class="fa-key"></i>
                                         <input id="password" class="inptx" type="password" name="password"
@@ -173,6 +194,15 @@
                                         <button id="subeditPass" class="editBt">✓</button>
                                     </div>
                                 </div>
+                                <div id="showpasscopy" class="non_sign">
+                                    <button id="acBtCb" class="acBt">Password: <i class="fa-clipboard"></i></button>
+                                </div>
+                            </div>
+                            <div class="textareabx">
+                            <label>Add a small introduction about yourself, so others are able to see it: (when hover to
+                                your profile picture): </label>
+                                <textarea name="" id="description_tb" cols="30" rows="10" placeholder="Describe yourself - (Max: 255)..."></textarea>
+                                <button id="acBtDes" class="acBt">Save</button>
                             </div>
                         </div>
                     </div>
@@ -200,6 +230,7 @@
                                 <button class="srchbt"></button>
                             </div>
                         </div>
+                        <div id="yourreeles" class="slide-content"></div>
                     </div>
                 </div>
             </div>
@@ -232,17 +263,24 @@
     </footer>
 
     <!-- scripts-->
+    <script src="../js/characterCounter.js"></script>
     <script src="../js/FRvalidator.js"></script>
     <script src="../js/personalTabHandler.js"></script>
     <script src="../js/tab-switcher.js"></script>
     <script src="../js/profileActH.js"></script>
     <script src="../js/colorGenerator.js"></script>
     <script src="../js/testIndicator.js"></script>
+    <script src="../js/mreeleGenerator.js"></script>
+    <script src="../js/clubLineGenerator.js"></script>
     <script src="../js/sidebarMech.js"></script>
     <script src="../js/mouseDrag.js"></script>
+    <script src="../mini-router/postGetP.js"></script>
     <script src="../mini-router/redirect.js"></script>
     <script src="../mini-router/pHandler.js"></script>
     <script src="../mini-router/routescript.js"></script>
+    <script src="../mini-router/makeClub.js"></script>
+    <script src="../mini-router/reeleInteract.js"></script>
+    <script src="../mini-router/clubGet.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
