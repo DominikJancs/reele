@@ -5,3 +5,5 @@ const appl = require('./conf.js');
 
 //Szerver elinditása az adott PORTON
 appl.listen(setup.port);
+
+module.exports = appl;
