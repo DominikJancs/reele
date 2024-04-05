@@ -14,7 +14,7 @@ const router = require('express').Router();
 
 // Felhasználói kérések kezelésére szolgáló útvonalak
 router.post('/signup', valid.validation, exist.existchk, userForm.regU, cookie.cookieSet); // Regisztráció
-router.post('/ich', auth.verifyToken, icHandler.iconHandle, cookie.cookieSet); // Ikonszolgáltatás kezelése
+router.post('/ich', auth.verifyToken, icHandler.iconHandle, cookie.cookieSet); // Ikon kezelése
 router.post('/pch', auth.verifyToken, passHandler.pCH); // Jelszó módosítása
 router.post('/des', auth.verifyToken, chkCharacter.charaterChk255, descUp.upDes); // Leírás frissítése
 router.post('/login', valid.validation, admin.chkA, userForm.signU, cookie.cookieSet); // Bejelentkezés
