@@ -1,9 +1,9 @@
 const jwt = require("jsonwebtoken");
 const setup = require("../setup");
 
-// Felhasználói token ellenőrző middleware függvény
 async function verifyToken(req, res, next) {
     const token = req.cookies.token;
+
     try {
         const user = await jwt.verify(token, setup.tokenset);
         var udata = {
@@ -13,13 +13,13 @@ async function verifyToken(req, res, next) {
           icon: user.icon
         };
         req.user = udata;
-
-        next();
+        req.exist = true;
     }
     catch {
         res.clearCookie("token");
-        return res.redirect("/u/login");
+        req.exist = false;
     }
+    next();
 }
 
 exports.verifyToken = verifyToken;
