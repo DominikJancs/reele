@@ -15,12 +15,12 @@ function sideBarAct(e) {
     clearAlayer();
     const sideID = e.target.id;
     if (sideID == "left-side-bt") {
-        if (leftSideBar.classList.contains("open")) (leftSideBar.classList.remove("open"), bodyClass.remove('dis-scroll'));
+        if (leftSideBar.classList.contains("open")) (leftSideBar.classList.remove("open"));
         else (leftSideBar.classList.add("open"), bodyClass.add('dis-scroll'), leftAicon.classList.add('opacity-side-bt'));
         rightSideBar.classList.remove("open");
     } else if (sideID == "right-side-bt") {
-        if (rightSideBar.classList.contains("open")) (rightSideBar.classList.remove("open"), bodyClass.remove('dis-scroll'));
-        else (rightSideBar.classList.add("open"), bodyClass.add('dis-scroll'), rightAicon.classList.add('opacity-side-bt'), console.log('eljutott'));
+        if (rightSideBar.classList.contains("open")) (rightSideBar.classList.remove("open"));
+        else (rightSideBar.classList.add("open"), rightAicon.classList.add('opacity-side-bt'));
         if (!e.target.classList.contains('bookmark-side-icon')) leftSideBar.classList.remove("open");
     }
 }

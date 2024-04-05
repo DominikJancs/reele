@@ -1,0 +1,1 @@
+generateColor("#reele-cover", "#header-linear", "background-top");

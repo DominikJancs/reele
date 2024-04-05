@@ -8,6 +8,9 @@ const maxFileSize = 2 * 1024 * 1024,
     replaceMsgBx = document.querySelector('#replaceMsgBx'),
     acBtDe = document.querySelector('#acBtDe'),
     acBtAc = document.querySelector('#acBtAc'),
+    acBtCb = document.querySelector('#acBtCb'),
+    acBtDes = document.querySelector('#acBtDes'),
+    showpasscopy = document.querySelector('#showpasscopy'),
     ucProImg = document.querySelector('#user-profile'),
     replaceMsgTit = document.querySelector('#replaceMsgTit');
 var file = null,
@@ -27,9 +30,27 @@ const acAc = async () => {
     if (uplChk) (replaceMsg("Updated ✓..."), setDefuPRo(), setProUrl({ blob: true, src: file }));
     else (replaceMsg("Error ✘..."), setDefuPRo(), setProUrl({ blob: false, src: defucImgSrc }));
 }
+
+const acBc = async () => {
+    await navigator.clipboard.writeText(showpasscopy.getAttribute('data-clipboard').value);
+    console.log(showpasscopy.getAttribute('data-clipboard').value)
+    showpasscopy.removeAttribute('data-clipboard');
+}
+
+const acDes = async () => {
+    var descript = document.querySelector('#description_tb').value;
+    var chkCh = charaters(5, 255, descript);
+    if (chkCh) var uplChk = await upActDes({descript: descript});
+    if (uplChk) ;
+    else ;
+}
 /*----*/
 
 acBtAc.addEventListener('click', acAc);
+
+acBtCb.addEventListener('click', acBc);
+
+acBtDes.addEventListener('click', acDes);
 
 function profileCh(e) {
     var chkproinp = chkUpInp(e);
