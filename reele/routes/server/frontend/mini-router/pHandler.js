@@ -6,27 +6,49 @@ navIcon.addEventListener('click', event => {
 });
 
 async function upActIc(f) {
-    return new Promise((resolve, reject) => {
-        postForm('http://192.168.0.143:8000/api/ich', f)
-            .then((response) => {
-                CurrStatusCode = response.status;
-                return response.json()
-            }).then(data => {
-                if (CurrStatusCode == 201) resolve(true);
-                else resolve(false);
-            });
-    });
+    CurrStatusCode = null;
+    if (f) {
+        return new Promise((resolve, reject) => {
+            postForm('http://192.168.0.143:8000/api/ich', f)
+                .then((response) => {
+                    CurrStatusCode = response.status;
+                    return response.json()
+                }).then(data => {
+                    if (CurrStatusCode == 201) resolve(true);
+                    else resolve(false);
+                });
+        });
+    }
 }
 
 async function upActPass(d) {
-    return new Promise((resolve, reject) => {
-        postData('http://192.168.0.143:8000/api/pch', d)
-            .then((response) => {
-                CurrStatusCode = response.status;
-                return response.json()
-            }).then(data => {
-                if (CurrStatusCode == 201) resolve(true);
-                else resolve(false);
-            });
-    });
+    CurrStatusCode = null;
+    if (d) {
+        return new Promise((resolve, reject) => {
+            postData('http://192.168.0.143:8000/api/pch', d)
+                .then((response) => {
+                    CurrStatusCode = response.status;
+                    return response.json()
+                }).then(data => {
+                    if (CurrStatusCode == 201) resolve(true);
+                    else resolve(false);
+                });
+        });
+    }
+}
+
+async function upActDes(d) {
+    CurrStatusCode = null;
+    if (d) {
+        return new Promise((resolve, reject) => {
+            postData('http://192.168.0.143:8000/api/des', d)
+                .then((response) => {
+                    CurrStatusCode = response.status;
+                    return response.json()
+                }).then(data => {
+                    if (CurrStatusCode == 201) resolve(true);
+                    else resolve(false);
+                });
+        });
+    }
 }

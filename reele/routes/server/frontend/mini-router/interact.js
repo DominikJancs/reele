@@ -40,6 +40,7 @@ function catchroute(e, route) {
                 return response.json();
             })
             .then(data => {
+                console.log(data);
                 switch (CurrStatusCode) {
                     case 404:
                         indicateUIres(data);
@@ -53,7 +54,7 @@ function catchroute(e, route) {
                                 if (CurrStatusCode == 201) redirect("/");
                             });
                         else if (route == "signup" && iconInp.value.length == 0) redirect("/");
-                        else if (route == "login") redirect("/");
+                        else if (route == "login") redirect(data.name != null ? `/a/${data.name}` : "/");
                         break;
                     case 500:
                         // Server error...

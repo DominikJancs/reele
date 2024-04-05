@@ -1,17 +1,11 @@
-const listLogout = document.querySelector('#list-logout'),
-      logo = document.querySelector('#logo'),
-      listProfile = document.querySelector('#list-profile');
+const logo = document.querySelector('#logo'),
+      reele_create = document.querySelector('#list-reele');
 
-listLogout.addEventListener('click', event => {
-    get("http://192.168.0.143:8000/api/logout").then((data) => {
-        if(data.success) redirect("/u/");
-    });
-});
-
-//Test
-listProfile.addEventListener('click', event => {
-    redirect("/profile/");
-});
+reele_create.addEventListener('click', event => {
+    var clubname = reele_create.getAttribute('data-club');
+    console.log(clubname)
+    redirect(`http://192.168.0.143:8000/post/${clubname}`);
+});      
 
 logo.addEventListener('click', event => {
     redirect("/");
