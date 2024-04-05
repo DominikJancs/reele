@@ -1,3 +1,4 @@
+// Aszinkron adatok küldése POST kéréssel JSON formátumban
 async function postData(url = "", data = {}) {
     const response = await fetch(url, {
         method: "POST", // POST, PUT, DELETE ...       
@@ -9,6 +10,7 @@ async function postData(url = "", data = {}) {
     return response;
 };
 
+// Aszinkron adatok küldése POST kéréssel űrlap adattípussal
 async function postForm(url = "", img) {
     const formData = new FormData();
     formData.append('icon', img);
@@ -20,6 +22,7 @@ async function postForm(url = "", img) {
     return response;
 }; 
 
+// Aszinkron adatok küldése POST kéréssel űrlap adattípussal és céllal
 async function postDataForm(url = "", target, file) {
     const formData = new FormData();
     formData.append('target', target);
@@ -32,6 +35,7 @@ async function postDataForm(url = "", target, file) {
     return response;
 }; 
 
+// Aszinkron adatok küldése POST kéréssel űrlap adattípussal és több fájllal
 async function postDatasForm(url = "", data = [], file, file_2) {
     const formData = new FormData();
     formData.append('data', data);
@@ -45,6 +49,7 @@ async function postDatasForm(url = "", data = [], file, file_2) {
     return response;
 }; 
 
+// Aszinkron GET kérés küldése
 async function get(url = "") {
     const response = await fetch(url, {
         method: "GET", // POST, PUT, DELETE ...  
@@ -55,6 +60,7 @@ async function get(url = "") {
     return response.json();
 } 
 
+// Aszinkron GET kérés küldése
 async function getData(url = "") {
     const response = await fetch(url, {
         method: "GET", // POST, PUT, DELETE ...  
