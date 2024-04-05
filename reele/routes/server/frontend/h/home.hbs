@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="../css/menu.css">
     <link rel="stylesheet" href="../css/sidebar.css">
     <link rel="stylesheet" href="../css/fav.css">
+    <link rel="stylesheet" href="../css/reeleItem.css">
     <script src="../js/jquery-3.7.1.js"></script>
 </head>
 
@@ -31,12 +32,16 @@
                 <!-- <button class="srchbt"></button> -->
             </div>
             <div id="userinfobx">
-                <div class="clubicon" title="Manage a club(s)..."></div>
+                {{#if exist}}<div class="clubicon" title="Manage a club(s)..."></div>{{/if}}
                 <div class="dropdown">
                     <div class="usermenu">
-                        <div class="usericon"
+                        {{#if exist}}<div class="usericon"
                             style='background-image: url("http://192.168.0.143:8000/u/profiles/picture/{{data.username}}")'
                             title="{{data.username}}"></div>
+                        {{else}}
+                        <div class="usericon" style='background-image: url("../assets/plus_user.webp")'
+                            title="Your choice..."></div>
+                        {{/if}}
                         <div class="arrbx">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 800 200">
                                 <path class="stg1" d="M425.7,425.7L789.4,62.1c14.2-14.2,14.2-37.2,0-51.4c-14.2-14.2-37.2-14.2-51.4,0L400,348.6
@@ -45,12 +50,10 @@
                             </svg>
                         </div>
                     </div>
-                    <div class="dropdown-content">
+                    {{#if exist}}
+                    <div class="two-dropdown-content">
                         <a id="list-profile" class="list-item">
                             <p>{{data.username}}</p> <i class="fa-settings"></i>
-                        </a>
-                        <a class="list-item">
-                            <p>Create reele</p> <i class="fa-reeled"></i>
                         </a>
                         <a id="list-club" class="list-item">
                             <p>Manage club(s)</p> <i class="fa-club"></i>
@@ -59,6 +62,16 @@
                             <p>Log out</p> <i class="fa-logout"></i>
                         </a>
                     </div>
+                    {{else}}
+                    <div class="two-dropdown-content">
+                        <a id="list-signup" class="list-item">
+                            <p>Sign up</p> <i class="fa-regist"></i>
+                        </a>
+                        <a id="list-login" class="list-item">
+                            <p>Log in</p> <i class="fa-login"></i>
+                        </a>
+                    </div>
+                    {{/if}}
                 </div>
             </div>
         </div>
@@ -81,7 +94,55 @@
             </div>
         </div>
     </header>
-    <div id="hPadding"></div>
+    <div id="hPadding">
+        <div id="genre_bar">
+            <div id="classic" class="genre_item">
+                <div class="genre_pro">
+                    <label>classic</label>
+                </div>
+            </div>
+            <div id="action" class="genre_item">
+                <div class="genre_pro">
+                    <label>action</label>
+                </div>
+            </div>
+            <div id="comedy" class="genre_item">
+                <div class="genre_pro">
+                    <label>comedy</label>
+                </div>
+            </div>
+            <div id="crime" class="genre_item">
+                <div class="genre_pro">
+                    <label>crime</label>
+                </div>
+            </div>
+            <div id="drama" class="genre_item">
+                <div class="genre_pro">
+                    <label>drama</label>
+                </div>
+            </div>
+            <div id="sci-fi" class="genre_item">
+                <div class="genre_pro">
+                    <label>sci-fi</label>
+                </div>
+            </div>
+            <div id="western" class="genre_item">
+                <div class="genre_pro">
+                    <label>western</label>
+                </div>
+            </div>
+            <div id="teaching" class="genre_item">
+                <div class="genre_pro">
+                    <label>teaching</label>
+                </div>
+            </div>
+            <div id="nature" class="genre_item">
+                <div class="genre_pro">
+                    <label>nature</label>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <main id="container">
         <div id="left-sidebar-bx" class="sidebar-bx">
@@ -104,6 +165,26 @@
                                 <button class="srchbt"></button>
                             </div>
                         </div>
+                        <div class="slide-content-s">
+                            <div class="slider-content-header">
+                                <div class="slider-content-title-bx">
+                                    <div class="side-icon-bx club-icon-gray"></div>
+                                    <p class="side-ind-tit">Joined</p>
+                                </div>
+                            </div>
+                            <span class="line-vertical-b"></span>
+                            <div id="joined-clubs" class="clubs-disp-bx"></div>
+                        </div>
+                        <div class="slide-content-s">
+                            <div class="slider-content-header">
+                                <div class="slider-content-title-bx">
+                                    <p class="side-ind-tit">Top 5</p>
+                                    <div class="side-icon-bx club-icon-gray"></div>
+                                </div>
+                            </div>
+                            <span class="line-vertical-b"></span>
+                            <div id="top5-clubs" class="clubs-disp-bx"></div>
+                        </div>
                     </div>
                 </div>
                 <i class="fa-knob-l"></i>
@@ -111,267 +192,27 @@
         </div>
 
         <div id="slider-content">
-            <h2 style="padding: 0; margin: 0;">
-                Minden eddigi társadalom története(2) osztályharcok története. Szabad és rabszolga, patrícius és
-                plebejus, báró és jobbágy, céhmester(3) és mesterlegény, egyszóval: elnyomó és elnyomott folytonos
-                ellentétben álltak egymással, szakadatlan, hol palástolt, hol nyílt harcot vívtak, olyan harcot,
-                amely mindenkor az egész társadalom forradalmi átalakulásával vagy a harcban álló osztályok közös
-                pusztulásával végződött. A történelem korábbi korszakaiban majdnem mindenütt a társadalomnak
-                különböző rendekre való teljes tagoltságát, a társadalmi állások sokféle fokozatát látjuk. Az ókori
-                Rómában patríciusok, lovagok, plebejusok, rabszolgák; a középkorban hűbérurak, hűbéresek,
-                céhmesterek, mesterlegények, jobbágyok, s ezenkívül még ezeknek az osztályoknak majd mindegyikében
-                ismét külön fokozatok vannak. A hűbéri társadalom pusztulásából keletkezett modern polgári
-                társadalom nem szüntette meg az osztályellentéteket. Csak új osztályokkal, az elnyomás új
-                feltételeivel, a harc új formáival cserélte fel a régieket. A mi korszakunkat, a burzsoázia
-                korszakát azonban az jellemzi, hogy egyszerűsítette az osztályellentéteket. Az egész társadalom
-                mindinkább két nagy ellenséges táborra szakad, két nagy, egymással homlokegyenest szembenálló
-                osztályra: burzsoáziára és proletariátusra. A középkor jobbágyaiból lettek az első városok polgárai;
-                ebből a polgárságból fejlődtek ki a burzsoázia első elemei. Amerika felfedezése, Afrika
-                körülhajózása új teret nyitott a felemelkedő burzsoáziának. A kelet-indiai és kínai piac, Amerika
-                gyarmatosítása, a gyarmatokkal folytatott csere, a csereeszközök és egyáltalában az áruk gyarapodása
-                – mindez eddig soha nem ismert lendületet adott a kereskedelemnek, a hajózásnak, az iparnak, és
-                ezzel előidézte a széthulló hűbéri társadalom forradalmi elemének gyors fejlődését. Az ipar űzésének
-                eddigi feudális vagy céhes módja már nem tudta kielégíteni az új piacokkal megnövekvő szükségletet.
-                Helyébe a manufaktúra lépett. A céhmestereket kiszorította az ipari középrend; a különböző
-                testületek közötti munkamegosztást felváltotta az egyes műhelyen belüli munkamegosztás. De egyre
-                tágultak a piacok, egyre nőtt a szükséglet. Már a manufaktúra sem tudta kielégíteni. Ekkor a gőz és
-                a gépi berendezés forradalmasította az ipari termelést. A manufaktúra helyébe a modern nagyipar
-                lépett, az ipari középrend helyét ipari milliomosok, egész ipari hadseregek főnökei, a modern
-                burzsoák foglalták el. A nagyipar létrehozta a világpiacot, amelyet Amerika felfedezése
-                előkészített. A világpiac a kereskedelem, a hajózás, a szárazföldi közlekedés mérhetetlen fejlődését
-                idézte elő. Ez viszont visszahatott az ipar terjeszkedésére, és amilyen mértékben terjeszkedett az
-                ipar, a kereskedelem, a hajózás és a vasút, ugyanolyan mértékben fejlődött a burzsoázia,
-                gyarapította tőkéit és szorította háttérbe a középkorból átöröklött összes osztályokat. Látjuk
-                tehát, hogy maga a modern burzsoázia egy hosszú fejlődési folyamatnak, a termelési és érintkezési
-                módban végbement sorozatos forradalmi átalakulásoknak a terméke. A burzsoázia e fejlődésének minden
-                egyes fokát megfelelő politikai haladás[A] kísérte. A burzsoázia elnyomott rend a hűbérurak uralma
-                alatt, felfegyverzett és önkormányzati társulás a kommunában(4), itt független városköztársaság[B],
-                ott a monarchia harmadik, adóköteles rendje[C], azután a manufaktúra idején a nemesség ellensúlya a
-                rendi vagy az abszolút monarchiában, s fő alapzata egyáltalában a nagy monarchiáknak, végül a
-                nagyipar és a világpiac létrehozása után a modern képviseleti államban kivívta magának a kizárólagos
-                politikai uralmat. A modern államhatalom nem más, mint az egész burzsoáosztály közös ügyeit igazgató
-                bizottság. A burzsoáziának a történelemben felettébb forradalmi szerepe volt. A burzsoázia, ahol
-                uralomra jutott, szétrombolt minden hűbéri, patriarchális, idillikus viszonyt. Könyörtelenül
-                széttépte a tarkabarka hűbéri kötelékeket, melyek az embert természetes feljebbvalójához fűzték, s
-                nem hagyott meg más köteléket ember és ember között, mint a meztelen érdeket, az érzés nélküli
-                „készpénzfizetést”. A jámbor rajongás, a lovagi lelkesedés, a nyárspolgári érzelgősség szent
-                borzongását az önző számítás jeges vizébe fojtotta. A személyi méltóságot csereértékké oldotta fel,
-                és az oklevelekben biztosított, nehezen szerzett számtalan szabadság helyébe az egy lelkiismeretlen
-                kereskedelmi szabadságot iktatta. Egyszóval, a vallási és politikai illúziókba burkolt
-                kizsákmányolás helyébe a nyílt, szemérmetlen, közvetlen, sivár kizsákmányolást állította. A
-                burzsoázia megfosztotta dicsfényüktől az összes eleddig tisztelt és jámbor félelemmel szemlélt
-                tevékenységeket. Fizetett bérmunkásává változtatta az orvost, a jogászt, a papot, a költőt, a
-                tudomány emberét. A burzsoázia leszaggatta a családi viszonyról meghatóan szentimentális fátylát és
-                e viszonyt puszta pénzviszonyra redukálta. A burzsoázia leleplezte, hogy annak a brutális
-                erőmegnyilvánulásnak, amelyet a reakció a középkoron annyira csodál, megfelelő kiegészítője a
-                legrenyhébb semmittevés volt. Csak a burzsoázia mutatta meg, mit tud az emberi tevékenység
-                létrehozni. Különb csodaműveket létesített, mint az egyiptomi piramisok, a római vízvezetékek és a
-                gótikus katedrálisok, különb hadjáratokat vitt véghez, mint a népvándorlás és a kereszteshadjáratok.
-                A burzsoázia nem létezhet anélkül, hogy ne forradalmasítsa folyton a termelési szerszámokat, tehát a
-                termelési viszonyokat, tehát az összes társadalmi viszonyokat. Ezzel szemben minden korábbi ipari
-                osztály első létfeltétele a régi termelési mód változatlan fenntartása volt. A burzsoá korszakot
-                minden előbbi korszaktól a termelés folytonos átalakítása, az összes társadalmi állapotok
-                szakadatlan megrendítése, az örökös bizonytalanság és mozgás különbözteti meg. Az összes szilárd,
-                berozsdásodott viszonyok, a nyomukban járó régtől tisztelt képzetekkel és nézetekkel együtt
-                felbomlanak, az összes újonnan kialakuló viszonyok elavulnak, mielőtt még megcsontosodhatnának.
-                Minden, ami rendi és állandó, elpárolog, mindent, ami szent, megszentségtelenítenek, és az emberek
-                végre arra kényszerülnek, hogy józan szemmel vizsgálják léthelyzetüket, kölcsönös kapcsolataikat. Az
-                egyre kiterjedtebb piacnak a szükséglete, amelyen termékeit eladhatja, végigkergeti a burzsoáziát az
-                egész földgolyón. Mindenüvé be kell magát fészkelnie, mindenütt be kell rendezkednie, mindenütt
-                összeköttetéseket kell létesítenie. A burzsoázia a világpiac kiaknázása által valamennyi ország
-                termelését és fogyasztását kozmopolitává formálta. A reakciósok nagy bánatára kihúzta az ipar lába
-                alól a nemzeti talajt. Az ősi nemzeti iparok elpusztultak és napról napra pusztulnak. Új iparok
-                szorítják ki őket, amelyeknek meghonosítása minden civilizált nemzet életkérdésévé válik, olyan
-                iparok, amelyek már nem hazai nyersanyagot dolgoznak fel, hanem a legtávolabbi égövek nyersanyagát,
-                és amelyeknek gyártmányait nemcsak magában az országban, hanem a világ minden részén fogyasztják. A
-                régi, belföldi termékékkel kielégített szükségletek helyébe újak lépnek, amelyeknek kielégítésére a
-                legtávolibb országok és éghajlatok termékei kellenek. A régi helyi és nemzeti önellátás és
-                elzárkózottság helyébe a nemzetek sokoldalú érintkezése, egymástól való sokrétű függése lép. És ez
-                így van nemcsak az anyagi, hanem a szellemi termelésben is. Az egyes nemzetek szellemi termékei
-                közkinccsé válnak. A nemzeti egyoldalúság és korlátoltság mindinkább lehetetlenné válik, és a sok
-                nemzeti és helyi irodalomból világirodalom alakul ki. A burzsoázia az összes termelési szerszámok
-                gyors tökéletesítése, a végtelenül megkönnyített közlekedés révén valamennyi nemzetet, még a
-                legbarbárabbakat is, belerántja a civilizációba. Áruinak olcsó ára az a nehéztüzérség, amellyel
-                rommá lő minden kínai falat, amellyel kapitulációra bírja a barbárok legmakacsabb idegengyűlöletét
-                is. Minden nemzetet rákényszerít, hogy, hacsak nem akarnak tönkremenni, elsajátítsák a burzsoázia
-                termelési módját; rákényszeríti őket, hogy meghonosítsák maguknál az úgynevezett civilizációt, azaz
-                váljanak burzsoává. Egyszóval: a burzsoázia a saját képmására formált világot teremt magának. A
-                burzsoázia a falut a város uralma alá vetette. Óriási városokat teremtett, a városi népesség
-                létszámát a falusival szemben nagymértékben megnövelte, s ezzel a népesség jelentékeny részét a
-                falusi élet bárgyúságából kiragadta. S ahogy a falut a várostól, úgy a barbár és félbarbár
-                országokat a civilizáltaktól, a paraszt népeket a burzsoá népektől, a Keletet a Nyugattól tette
-                függővé. A burzsoázia mindinkább megszünteti a termelési eszközök, a birtok és a népesség
-                szétforgácsoltságát. A népességet összesűrítette, a termelési eszközöket centralizálta, és a
-                tulajdont kevés kézben koncentrálta. Ennek szükségszerű következménye a politikai centralizáció
-                volt. Független, szinte csak szövetséges viszonyban levő tartományokat, melyeknek különböző
-                érdekeik, törvényeik, kormányaik és vámjaik voltak, egy nemzetté tömörítettek, melynek egy a
-                kormánya, egy a törvénye, egy a nemzeti osztályérdeke, egy a vámhatára. A burzsoázia alig százéves
-                osztályuralma alatt tömegesebb és kolosszálisabb termelőerőket hozott létre, mint valamennyi letűnt
-                nemzedék együttvéve. Természeti erők leigázása, gépi berendezés, a vegyészet alkalmazása iparban és
-                földművelésben, gőzhajózás, vasutak, villamos távírók, egész világrészek megművelés alá vétele,
-                folyók hajózhatóvá tétele, lábdobbantásra a földből előpattanó egész népességek – mely korábbi
-                század sejthette, hogy a társadalmi munka méhében ilyen termelőerők szunnyadnak! Láttuk azonban,
-                hogy azok a termelési és érintkezési eszközök, amelyeknek alapzatán a burzsoázia kialakult, a hűbéri
-                társadalomban jöttek létre. E termelési és érintkezési eszközök fejlődésének bizonyos fokán azok a
-                viszonyok, amelyek között a hűbéri társadalom termelt és cserélt, a földművelés és az ipar feudális
-                szervezete, egyszóval a feudális tulajdonviszonyok nem feleltek meg többé a már kifejlett
-                termelőerőknek. Gátolták a termelést, ahelyett, hogy előmozdították volna. Mindmegannyi béklyóvá
-                váltak. Szét kellett feszíteni, szét is feszítették őket. Helyükbe a szabad konkurrencia lépett, a
-                neki megfelelő társadalmi és politikai berendezkedéssel, a burzsoáosztály gazdasági és politikai
-                uralmával. Szemünk előtt hasonló mozgás megy végbe. A polgári termelési és érintkezési viszonyok, a
-                polgári tulajdonviszonyok, a modern polgári társadalom, amely oly hatalmas termelési és érintkezési
-                eszközöket varázsolt elő, ahhoz a boszorkánymesterhez hasonlít, aki nem ura többé az általa
-                felidézett földalatti hatalmaknak. Az ipar és a kereskedelem története évtizedek óta nem egyéb, mint
-                annak a története, hogyan lázonganak a modern termelőerők a modern termelési viszonyok ellen, azok
-                ellen a tulajdonviszonyok ellen, melyek a burzsoáziának és uralmának életfeltételei. Elég a
-                kereskedelmi válságokat említenünk, amelyek periodikus visszatérésükkel egyre fenyegetőbben
-                kétségessé teszik az egész polgári társadalom létezését. A kereskedelmi válságokban rendszeresen
-                megsemmisül nemcsak az előállított termékeknek, hanem a már létrehozott termelőerőknek egy nagy
-                része is. A válságokban olyan társadalmi járvány tör ki, melyet minden előbbi korszak képtelenségnek
-                tekintett volna – a túltermelés járványa. A társadalom hirtelen a pillanatnyi barbárság állapotába
-                esik vissza; mintha valami éhínség, általános megsemmisítő háború megfosztotta volna minden
-                létfenntartási eszköztől; az ipar, a kereskedelem mintha megsemmisült volna, és miért? Azért, mert a
-                társadalomnak túlsok a civilizációja, túlsok a létfenntartási eszköze, túlsok az ipara, túlsok a
-                kereskedelme. A társadalom rendelkezésére álló termelőerők már nem a polgári civilizáció és[D] a
-                polgári tulajdonviszonyok előmozdítására szolgálnak; ellenkezőleg, túl hatalmasokká lettek e
-                viszonyok számára, e viszonyok gátolják őket; és mihelyt ezt a gátat leküzdik, az egész polgári
-                társadalomban zavart támasztanak, veszélyeztetik a polgári tulajdon létezését. A polgári viszonyok
-                túl szűkké váltak ahhoz, hogy befogadhassák az önmaguk által létrehozott gazdagságot. – Hogyan küzdi
-                le a burzsoázia a válságokat? Egyrészt úgy, hogy kénytelen megsemmisíteni a termelőerők nagy
-                tömegét; másrészt úgy, hogy új piacokat hódít meg, és alaposabban aknázza ki a régieket. Tehát
-                hogyan? Úgy, hogy még egyetemesebb, még hatalmasabb válságokat készít elő és a válságok
-                elhárításának eszközeit csökkenti. A fegyverek, amelyekkel a burzsoázia a feudalizmust leterítette,
-                most maga a burzsoázia ellen fordulnak. De a burzsoázia nemcsak kikovácsolta a fegyvereket, amelyek
-                halálát okozzák; megszülte azokat a férfiakat is, akik e fegyvereket forgatni fogják – a modern
-                munkásokat, a proletárokat. Amilyen mértékben a burzsoázia, azaz a tőke fejlődik, ugyanolyan
-                mértékben fejlődik a proletariátus, a modern munkások osztálya, akik csak addig élnek, amíg munkát
-                kapnak, és akik csak addig kapnak munkát, amíg munkájuk a tőkét gyarapítja. Ezek a munkások, akik
-                darabonként kénytelenek eladni magukat, éppen olyan áruk, mint minden egyéb kereskedelmi cikk, s
-                ezért éppúgy ki vannak téve a konkurrencia minden viszontagságának, a piac minden ingadozásának. A
-                proletárok munkája a gépi berendezés terjedésével és a munkamegosztással elvesztette minden önálló
-                jellegét és ezzel minden vonzóerejét a munkás számára. A munkás a gép puszta tartozékává válik,
-                akitől csak a legegyszerűbb, legegyhangúbb, legkönnyebben megtanulható fogást kívánják meg. Ezért a
-                munkás okozta költségek szinte kizárólag a megélhetéséhez és faja fenntartásához szükséges
-                létfenntartási eszközökre korlátozódnak. De az áruk ára, tehát a munka ára is egyenlő termelési
-                költségeivel. Ezért amilyen mértékben nő a munka ellenszenvessége, olyan mértékben csökken a
-                munkabér. Sőt mi több, amilyen mértékben nő a gépi berendezés és a munkamegosztás, ugyanolyan
-                mértékben nő a munka tömege[E] is, akár a munkaórák szaporítása, akár az adott idő alatt elvégzendő
-                munka szaporítása, a gépek gyorsabb járatása stb. révén. A modern ipar a patriarchális mester kis
-                műhelyét az ipari tőkés nagy gyárává változtatta át. Gyárban összezsúfolt munkástömegeket katonásan
-                szerveznek. Mint ipari közkatonákat altisztek és tisztek tökéletesen kiépített hierarchiájának
-                felügyelete alá helyezik őket. Nemcsak a burzsoáosztálynak, a burzsoá államnak a szolgái, hanem
-                napról napra, óráról órára szolgaságba görnyeszti őket a gép, a felügyelő, s mindenekelőtt maga az
-                egyes gyártulajdonos burzsoá. Ez a zsarnokság annál kicsinyesebb, gyűlöletesebb, elkeserítőbb, minél
-                nyíltabban hirdeti végcéljául a nyerészkedést. Minél kevesebb ügyességet és erőkifejtést kíván meg a
-                kézi munka, azaz minél inkább kifejlődik a modern ipar, annál inkább kiszorítja a férfiak munkáját a
-                női és a gyermekmunka[F]. A nemi és korkülönbségeknek a munkásosztályt illetőleg nincs többé
-                társadalmi érvénye. Már csak munkaszerszámok léteznek, amelyek koruk és nemük szerint különböző
-                költségeket okoznak. Ha a munkás kizsákmányolását a gyáros már annyira befejezte, hogy a munkás
-                készpénzben megkapja a munkabérét, akkor megrohanja a burzsoázia többi része: a háztulajdonos, a
-                szatócs, a zálogos stb. Az eddigi kis középrendek, a kisiparosok, kiskereskedők és járadékosok, a
-                kézművesek és parasztok, mindezek az osztályok[G] a proletariátusba süllyednek; részben azért, mert
-                kis tőkéjük nagyipar űzésére nem elegendő és a nagyobb tőkések konkurrenciáját nem bírja ki, részben
-                azért, mert szakmai ügyességüket új termelési módszerek elértéktelenítik. Így toborzódik a
-                proletariátus a népesség minden osztályából. A proletariátus különböző fejődési fokokon megy át.
-                Harca a burzsoázia ellen létezésével kezdődik. Eleinte az egyes munkások, azután egy gyár munkásai,
-                majd egy munkaág egy helységben dolgozó munkásai harcolnak az ellen az egyes burzsoá ellen, aki
-                közvetlenül kizsákmányolja őket. Támadásuk nemcsak a polgári termelési viszonyok ellen irányul,
-                hanem maguk a termelési szerszámok ellen is; megsemmisítik a konkurráló idegen árut, szétzúzzák a
-                gépeket, felgyújtják a gyárakat, igyekeznek a középkori munkás már letűnt helyzetét visszaszerezni
-                maguknak. Ezen a fokon a munkások az egész országban szétszórt és a konkurrencia által
-                szétforgácsolt tömeget alkotnak. A munkások tömegesebb összetartása még nem a saját egyesülésüknek,
-                hanem a burzsoázia egyesülésének a következménye, mert a burzsoáziának, saját politikai céljai
-                elérésére, az egész proletariátust mozgósítania kell, s egyelőre még mozgósíthatja is. Ezen a fokon
-                a proletárok tehát nem saját ellenségeik, hanem ellenségeik ellenségei ellen harcolnak, az abszolút
-                monarchia maradványai, a földtulajdonosok, a nem-ipari burzsoák, a kispolgárok ellen. Így az egész
-                történelmi mozgalom a burzsoázia kezében összpontosul; minden így kivívott győzelem a burzsoázia
-                győzelme. De az ipar fejlődésével nemcsak szaporodik a proletariátus, hanem nagyobb tömegekbe is
-                zsúfolódik, ereje nő, s ezt mindjobban érzi. A proletariátuson belül az érdekek, az életkörülmények
-                mindjobban kiegyenlítődnek, mert a gépi berendezés mindinkább elmossa a különbségeket munka és munka
-                között, s a bért csaknem mindenütt egyformán alacsony színvonalra szorítja le. A burzsoák növekvő
-                egymás közti konkurrenciája s az ebből fakadó kereskedelmi válságok a munkások bérét mind
-                ingadozóbbá teszik; a gépi berendezés egyre gyorsabban fejlődő, szüntelen tökéletesítése egész
-                életpozíciójukat teszi mind bizonytalanabbá; az egyes munkás és az egyes burzsoá közti összeütközés
-                mindinkább két osztály összeütközésének jellegét ölti. A munkások elkezdenek egyesüléseket[H]
-                alakítani a burzsoák ellen; tömörülnek munkabérük megvédelmezésére. Sőt állandó szövetségeket is
-                alapítanak, hogy ezen alkalmi zendülések esetére gondoskodjanak a maguk ellátásáról. Helyenként a
-                harc felkelésekben tör ki. Egyszer-másszor győznek a munkások, de csak ideig-óráig. Harcaik
-                tulajdonképpeni eredménye nem a közvetlen siker, hanem a munkások egyre szélesebben terjedő
-                egyesülése. Ezt előmozdítják a nagyipar által létrehozott egyre növekvő közlekedési eszközök,
-                amelyek a különböző helységek munkásai között kapcsolatot teremtenek. Márpedig csak erre a
-                kapcsolatra van szükség, hogy a sok, mindenütt azonos jellegű helyi harc nemzeti méretű harccá,
-                osztályharccá központosuljon. De minden osztályharc politikai harc. És azt az egyesülést, amihez a
-                középkori polgárnak a maga rossz útjaival évszázadok kellettek, a modern proletár a vasutak
-                segítségével néhány esztendő alatt véghezviszi. A proletároknak ezt az osztállyá és ezáltal
-                politikai párttá szerveződését minduntalan újra szétrobbantja a munkások egymás közötti
-                konkurrenciája, de mindig újra feltámad, erősebben, szilárdabban, hatalmasabban. S kihasználva a
-                burzsoázián belüli meghasonlásokat, kicsikarja a munkások egyes érdekeinek törvény formájában való
-                elismerését. Így például a tízórás törvényt Angliában. Egyáltalán, a régi társadalmon belüli
-                összeütközések sokféleképpen egyengetik a proletariátus fejlődésének útját. A burzsoázia szakadatlan
-                harcban áll: kezdetben az arisztokráciával, később magának a burzsoáziának ama részeivel, melyeknek
-                érdekei ellentmondásba kerülnek az ipar haladásával; állandóan harcol minden idegen ország
-                burzsoáziájával. Mindezekben a harcaiban kénytelen a proletariátushoz fordulni, segítségét igénybe
-                venni és ezzel a proletariátust a politikai mozgalomba bevonni. Maga a burzsoázia nyújtja tehát a
-                proletariátusnak saját műveltsége elemeit[I], vagyis a fegyvert önmaga ellen. Továbbá, mint láttuk,
-                az ipar haladása az uralkodó osztály egész rétegeit taszítja le a proletariátusba vagy legalábbis
-                fenyegeti életfeltételeiket. Ezek is a műveltség elemeinek[J]nagy tömegét nyújtják a
-                proletariátusnak. Végül olyan időkben, amikor az osztályharc döntéshez közeledik, a bomlási folyamat
-                az uralkodó osztályban, az egész régi társadalomban annyira heves, annyira kirívó jelleget ölt, hogy
-                az uralkodó osztály egy kis része elszakad osztályától és a forradalmi osztályhoz csatlakozik, ahhoz
-                az osztályhoz, amelyé a jövő. Ezért ugyanúgy, ahogy korábban a nemesség egy része átpártolt a
-                burzsoáziához, most a burzsoázia egy része pártol át a proletariátushoz, és nevezetesen a burzsoá
-                ideológusok egy része, azok, akik felküzdötték magukat az egész történelmi mozgalom elméleti
-                megértéséig. Valamennyi osztály közül, amely napjainkban a burzsoáziával szemben áll, csakis a
-                proletariátus valóban forradalmi osztály. A többi osztály a nagyipar kifejlődésével lezüllik és
-                elpusztul, a proletariátus a nagyipar legsajátabb terméke. A középrendek, a kisiparos, a
-                kiskereskedő, a kézműves, a paraszt – mind azért harcolnak a burzsoázia ellen, hogy középrendként
-                való létezésüket a pusztulástól megóvják. Ezek tehát nem forradalmiak, hanem konzervatívak. Sőt mi
-                több: reakciósak, mert megpróbálják a történelem kerekét visszafelé forgatni. Ha forradalmiak, akkor
-                azért azok, mert előttük áll a proletariátusba való átmenetük, akkor nem jelenlegi, hanem jövő
-                érdekeiket védelmezik, akkor elhagyják saját álláspontjukat, hogy a proletariátuséra térjenek át. A
-                lumpenproletariátust, a régi társadalom legalsó rétegeinek ezt a passzív rothadását a
-                proletárforradalom hellyel-közzel belesodorja a mozgalomba, de egész élethelyzete következtében
-                inkább hajlandó arra, hogy magát reakciós üzelmekhez megvásároltassa. A proletariátus
-                életfeltételeiben már megsemmisültek a régi társadalom életfeltételei. A proletárnak nincsen
-                tulajdona; feleségéhez és gyermekeihez való viszonyának már semmi köze a polgári családi viszonyhoz;
-                a modern ipari munka, a tőke modern igája, amely ugyanaz Angliában és Franciaországban, Amerikában
-                és Németországban, lehántott róla minden nemzeti jelleget. A törvények, az erkölcs, a vallás az ő
-                szemében csupa polgári előítélet, amelyek mögött megannyi polgári érdek rejtőzik. Minden eddigi
-                osztály, amely az uralmat meghódította, a már megszerzett életpozícióját úgy igyekezett biztosítani,
-                hogy az egész társadalmat alávetette az ő szerzési feltételeinek. A proletárok csak úgy hódíthatják
-                meg a társadalmi termelőerőket, hogy megszüntetik a maguk eddigi elsajátítási módját és ezzel az
-                egész eddigi elsajátítási módot. A proletároknak nincs semmi sajátjuk, amit biztosítaniok kellene, –
-                nekik le kell rombolniok minden eddigi magánbiztonságot és magánbiztosítékot. Minden eddigi mozgalom
-                kisebbségek mozgalma vagy kisebbségek érdekében folytatott mozgalom volt. A proletármozgalom az
-                óriási többség önálló mozgalma az óriási többség érdekében. A proletariátus, a mai társadalom
-                legalsóbb rétege, nem emelkedhet fel, nem egyenesedhet ki anélkül, hogy levegőbe ne röpítse a
-                hivatalos társadalmat alkotó rétegek fölötte emelkedő egész felépítményét. Ha nem is tartalmában, de
-                formájában a proletariátusnak a burzsoázia ellen folyó harca eleinte nemzeti. Minden egyes ország
-                proletariátusának természetesen mindenekelőtt a saját burzsoáziájával kell leszámolnia. A
-                proletariátus fejlődésének legáltalánosabb szakaszait felvázolva, a fennálló társadalmon belül dúló
-                többé vagy kevésbé burkolt polgárháborút követtük nyomon addig a pontig, amelyen nyílt forradalomban
-                tör ki, és a proletariátus a burzsoázia erőszakos megdöntése útján megalapítja uralmát. Amint
-                láttuk, minden eddigi társadalom az elnyomó és elnyomott osztályok ellentétén nyugodott. De ahhoz,
-                hogy valamely osztályt el lehessen nyomni, biztosítani kell számára azokat a feltételeket, amelyek
-                közt legalább szolgai létét tengetheti. A jobbágy a jobbágyság idején a kommuna tagjává küzdhette
-                fel magát, éppúgy, mint ahogy a kispolgár a feudális abszolutizmus járma alatt burzsoává. Ezzel
-                szemben a modern munkás nemcsak hogy nem emelkedik fel az ipar haladásával, hanem mind mélyebben
-                süllyed saját osztályának feltételei alá. A munkás pauperré válik és a pauperizmus még gyorsabban
-                nő, mint a népesség és a gazdagság. Ebből világosan kitűnik, hogy a burzsoázia képtelen arra, hogy
-                továbbra is a társadalom uralkodó osztálya maradjon és szabályozó törvényként ráerőszakolja a
-                társadalomra osztályának életfeltételeit. Képtelen az uralkodásra, mert képtelen arra, hogy
-                rabszolgájának létét akár csak rabszolgaságának keretében is biztosítsa, mert kénytelen őt olyan
-                helyzetbe süllyeszteni, amelyben neki kell rabszolgáját eltartania, ahelyett, hogy az tartaná el őt.
-                A társadalom nem élhet már alatta, azaz a burzsoázia élete már nem fér össze a társadalommal. A
-                burzsoáosztály létének és uralmának leglényegesebb feltétele a gazdagságnak magánosok kezében való
-                felhalmozódása, a tőke képződése és gyarapodása; a tőke feltétele a bérmunka. A bérmunka kizárólag a
-                munkások egymás közötti konkurrenciáján nyugszik. Az ipar haladása, amelynek az akarat nélküli és
-                ellenállásra képtelen hordozója a burzsoázia, a munkásoknak a konkurrencia okozta elszigetelődése
-                helyébe a munkásoknak a társulás révén létrejövő forradalmi egyesülését állítja. A nagyipar
-                fejlődésével tehát kicsúszik a burzsoázia lába alól maga a talaj, amelyen termel és a termékeket
-                elsajátítja. Mindenekelőtt saját sírásóját termeli. Pusztulása és a proletariátus győzelme egyaránt
-                elkerülhetetlen.
-            </h2>
+            <div id="slider_header">
+                <div id="clubinfBX">
+                    <div id="bannerbx"
+                        style='background-image: url("../assets/reele_digging_up_m.webp"); filter: blur(0px);'></div>
+                </div>
+                <div class="dropdown_ordering">
+                    <button class="orderingBT">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 800 200">
+                            <path class="stg1" d="M425.7,425.7L789.4,62.1c14.2-14.2,14.2-37.2,0-51.4c-14.2-14.2-37.2-14.2-51.4,0L400,348.6
+	                L62.1,10.7c-14.2-14.2-37.2-14.2-51.4,0C3.5,17.8,0,27.1,0,36.4S3.5,55,10.6,62.1l363.7,363.6c6.8,6.8,16.1,10.7,25.7,10.7
+	                C409.6,436.4,418.9,432.5,425.7,425.7z" />
+                        </svg>
+                    </button>
+                    <div class="ordering_content">
+                        <div>New</div>
+                        <div>Old</div>
+                        <div>Most reeled</div>
+                    </div>
+                </div>
+            </div>
+            <div id="slider_body"></div>
         </div>
 
         <div id="right-sidebar-bx" class="sidebar-bx">
@@ -394,6 +235,7 @@
                                 <button class="srchbt"></button>
                             </div>
                         </div>
+                        <div id="yourreeles" class="slide-content"></div>
                     </div>
                 </div>
             </div>
@@ -426,12 +268,23 @@
     </footer>
 
     <!-- scripts-->
+    {{#if exist}}
+    <script src="../mini-router/hLog.js"></script>
+    <script src="../mini-router/makeClub.js"></script>
+    {{else}}
+    <script src="../mini-router/reglog.js"></script>{{/if}}
     <script src="../js/sidebarMech.js"></script>
     <script src="../js/onscroll.js"></script>
     <script src="../js/searchbarMech.js"></script>
+    <script src="../js/postGenerator.js"></script>
+    <script src="../js/mreeleGenerator.js"></script>
+    <script src="../js/clubLineGenerator.js"></script>
+    <script src="../js/genremech.js"></script>
+    <script src="../mini-router/postGetH.js"></script>
     <script src="../mini-router/redirect.js"></script>
-    <script src="../mini-router/hHandler.js"></script>
     <script src="../mini-router/routescript.js"></script>
+    <script src="../mini-router/reeleInteract.js"></script>
+    <script src="../mini-router/clubGet.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
