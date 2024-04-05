@@ -7,8 +7,8 @@
     height: 100%;
     width: 100%;
     padding: 15px;
-    background-color: var(--bright-white-t);  
-    border-radius: 25pt; 
+    background-color: var(--bright-white-t);
+    border-radius: 25pt;
     border: 8px solid var(--bright-white);
     overflow: hidden;
     box-shadow: var(--light-shadow-reversed);
@@ -32,16 +32,6 @@
     height: fit-content;
     width: fit-content;
     gap: 25px;
-}
-
-#profile-header-linear {
-    top: 0;
-    left: 0;
-    right: 0;
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    z-index: 1;
 }
 
 .header-name {
@@ -74,7 +64,7 @@
     border: 6px solid var(--brighter-gray);
     overflow: hidden;
     z-index: 1;
-}   
+}
 
 .user-header {
     display: flex;
@@ -85,13 +75,10 @@
 }
 
 #personal-tab-content {
+    display: flex;
+    flex-direction: column;
     width: 100%;
-}
-
-.hidden {
-    height: 0px;
-    width: 0px;
-    overflow: hidden;
+    gap: 10px;
 }
 
 .inpbx {
@@ -167,34 +154,45 @@
     opacity: 0;
 }
 
-#replaceMsgBx {
+#showpasscopy {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
+    height: 2.5rem;
     width: 100%;
-    padding: 5px;
-    margin: 5px 0 0 0;
     transition: all .5s ease;
-    background-color: var(--bright-red);
-    border-radius: 6pt;
-    z-index: 5;
-    opacity: 0;
-    pointer-events: none;
 }
 
-#replaceMsgBx.hoppon {
-    opacity: 1;
+.textareabx {
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    width: 100%;
+    gap: 10px;
 }
 
 @media screen and (max-width: 600px) {
-    #profile-bx {padding: 0;}
-    #profile-header {width: 100%;}
-    .profile-row {justify-content: center;}
-    .user-header {width: 100%;}
-    .tab-bar {width: 100%;}
+    #profile-bx {
+        padding: 0;
+    }
+
+    #profile-header {
+        width: 100%;
+    }
+
+    .profile-row {
+        justify-content: center;
+    }
+
+    .user-header {
+        width: 100%;
+    }
+
+    .tab-bar {
+        width: 100%;
+    }
 }
 
 @media screen and (max-width: 375px) {
-    .user-header {flex-direction: column;}
+    .user-header {
+        flex-direction: column;
+    }
 }

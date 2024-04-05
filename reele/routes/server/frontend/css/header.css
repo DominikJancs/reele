@@ -1,5 +1,23 @@
 #hPadding {
     display: flex;
+    position: relative;
+    justify-content: center;
+    height: 8rem;
+    width: 100%;
+}
+
+#la-hPadding {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    height: 13rem;
+    width: 100%;
+}
+
+#hPadding-c {
+    display: flex;
+    position: relative;
+    justify-content: center;
     height: 5rem;
     width: 100%;
 }
@@ -14,11 +32,45 @@
     padding: 0px;
     margin: 0px;
     background-color: var(--bright-white);
-    z-index: 4;
     box-shadow: var(--light-shadow-out);
     -webkit-box-shadow: var(--light-shadow-out);
     -moz-box-shadow: var(--light-shadow-out);
     z-index: 5;
+}
+
+#la-headbar {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    height: fit-content;
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+    background: linear-gradient(0deg, rgba(0,0,0,0) 0%, var(--paste-gray) 100%, var(--paste-gray) 100%);
+    z-index: 5;
+}
+
+#la-navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: fit-content;
+    width: 100%;
+    padding: 0 65px;
+    overflow: visible;
+    gap: 20px; 
+}
+
+#head-nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: fit-content;
+    width: 100%;
+    padding: 65px;
+    overflow: visible;
+    gap: 20px; 
 }
 
 #navbar {
@@ -133,31 +185,78 @@
     background-image: url('../assets/reele_logo.svg');
 }
 
+#la-logo {
+    height: 3.2rem;
+    width: 3.2rem;
+    background-image: url('../assets/reele_logo.svg');
+}
+
+#la-flag {
+    height: 3.2rem;
+    width: 3.2rem;
+    background-image: url('../assets/flag.svg');
+}
+
+.la-flag-mini {
+    height: 1.5rem;
+    width: 1.5rem;
+    background-image: url('../assets/flag.svg');
+    pointer-events: none;
+}
+
+#la-name {
+    color: var(--mid-gray);
+    font-size: 25px;
+}
+
 #title {
     height: 4rem;
     width: 7rem;
     background-image: url('../assets/reele_title.svg');
 }
 
-#title,
-#logo {
-    cursor: pointer;
-    background-position: center center;
-    background-repeat: no-repeat;
+#exit {
+    height: 2.5rem;
+    width: 2.5rem;
+    background-image: url('../assets/logout.svg');
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
 }
 
-#logo {
+#exit:hover {
+    background-image: url('../assets/a_logout.svg');
+    animation-name: floating-horizontal;
+}
+
+#title,
+#logo,
+#exit,
+#la-logo,
+#la-flag,
+.la-flag-mini {
+    cursor: pointer;
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-color: transparent;
+}
+
+#logo,
+#la-logo {
     border-radius: 50%;
 }
 
-#logo:hover {
+#logo:hover,
+#la-logo:hover {
     box-shadow: 0px 0px 11px 1px var(--bright-red);
 }
 
 #title:hover,
 #logo:hover,
 .selectbt:hover,
-.srchbt:hover {
+.srchbt:hover,
+#la-logo:hover {
     filter: brightness(126%);
 }
 
@@ -180,6 +279,15 @@
 }
 
 #userinfobx {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: fit-content;
+    gap: 20px;
+}
+
+#lainfobx {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -230,7 +338,7 @@
 }
 
 .clubicon {
-    background-image: url('../assets/GROUP.webp');
+    background-image: url('../assets/_plus_group.png');
     cursor: pointer;
 }
 
@@ -264,10 +372,12 @@
 }
 
 .usericon,
-.clubicon {
+.clubicon,
+.clubprofile,
+.clubicon-mini {
     display: flex;
-    height: 3.5rem;
-    width: 3.5rem;
+    min-height: 56px;
+    min-width: 56px;
     background-color: var(--mid-gray-t);
     background-position: center;
     background-repeat: no-repeat;
@@ -276,10 +386,16 @@
     border: 3px solid var(--pale-red);
 }
 
+.clubicon-mini {
+    height: 2.5rem;
+    width: 2.5rem;
+}
+
 /* transition all elements */
 .usericon,
 .clubicon,
 #logo,
+#la-logo,
 #title,
 #selectbar,
 #navbar,
@@ -314,8 +430,17 @@
     display: none;
 }
 
+.user_id_absolute-l {
+    position: absolute;
+    left: 0;
+    margin: 10px 0;
+}
+
 @media screen and (max-width: 600px) {
     #navbar {padding: 0px 15px;}
+    #la-navbar {padding: 0px 15px;}
+    #head-nav {padding: 25px;}
+    #la-hPadding {height: 8rem;}
 
     #logo {width: 0;}
 
@@ -323,9 +448,8 @@
 
     .usericon,
     .navicon {
-        height: 3rem;
-        width: 3rem;
-        background-size: 3rem;
+        min-height: 48px !important;
+        min-width: 48px !important;
     }
 
     #logoContainer {gap: 0;}

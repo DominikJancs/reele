@@ -1,0 +1,227 @@
+.reeleItemBx {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--mid-gray-t);
+    backdrop-filter: blur(3px);
+    height: 58rem;
+    width: 100%;
+    border-radius: 50pt;
+    border: 4px solid var(--bright-white);
+    box-shadow: var(--light-shadow);
+    -webkit-box-shadow: var(--light-shadow);
+    -moz-box-shadow: var(--light-shadow);
+    overflow: hidden;
+}
+
+.reeleItemInteract{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    background-color: var(--bright-gray);
+    border-radius: 40px;
+    box-shadow: var(--light-shadow-out);
+    -webkit-box-shadow: var(--light-shadow-out);
+    -moz-box-shadow: var(--light-shadow-out);
+    overflow: hidden;
+     transition: all .5s ease;
+     cursor: pointer;
+}
+
+.reeleItemInteract:hover {
+    background-color: var(--brighter-gray);
+    transition: all .5s ease;
+}
+
+.reeleItemInteract:hover .reeleBookCover {
+    background-color: var(--brighter-gray);
+    transition: all .5s ease;
+}
+
+.reeleItemHeader {
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    width: 100%;
+    padding: 15px;
+}
+
+.rih-row {
+    display: flex;
+    height: fit-content;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px 20px;
+    gap: 10px;
+}
+
+.reeleautherbx {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 0 5px 0 0;
+}
+
+.doctitle {
+    font-weight: 700;
+    font-size: 25px;
+}
+
+.reeleItemFooter {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 5rem;
+}
+
+.reeleBookBx {
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+
+.reeleBookPages {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    gap: 10px;
+}
+
+.reeleBookPage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    max-height: 512px;
+    width: 50%;
+}
+
+.reeleBookCover {
+    display: flex;
+    align-items: center;
+    position: relative;
+    justify-content: center;
+    background-color: var(--bright-gray);
+    height: 100%;
+    width: 100%;
+    border-top: 1px solid var(--bright-white-t);
+    border-radius: 25px 25px 0 0;
+    transition: all .5s ease;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.reeleBookBack {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    justify-content: center;
+    background-color: var(--bright-gray);
+    height: 100%;
+    width: 100%;
+    border-radius: 25px 25px 0 0;
+    filter:brightness(75%) blur(35px);
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-position: center center;
+    transition: all .5s ease;
+    pointer-events: none;
+}
+
+.reeleCover {
+    height: 100%;
+    position: absolute;
+    width: auto;
+    pointer-events: none;
+    border-radius: 8px;
+    z-index: 2;
+}
+
+.reeleInteractIcon {
+    height: 40px;
+    width: fit-content;
+    padding: 4px 0;
+}
+
+.rif-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: calc(100% / 3);
+}
+
+.reeleInteractbutton,
+.reeleInteractbutton_R,
+.reeleInteractbutton_T {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    min-height: 2.5rem;
+    width: fit-content;
+    padding: 2px 25px;
+    background-color: var(--bright-white-t);
+    border-radius: 35px;
+    gap: 10px;
+    transition: all .5s ease;
+    cursor: pointer;
+}
+
+.reeleInteractbutton:hover,
+.reeleInteractbutton_R:hover,
+.reeleInteractbutton_T:hover {
+    background-color: var(--bright-gray);
+}
+
+.reeleInteracttitle,
+.reeleInteractIcon {
+    pointer-events: none;
+}
+
+@media screen and (max-width: 1024px) {
+    .reeleItemBx {
+        height: 38rem;
+        border-radius: 25pt;
+    }
+
+    .reeleItemInteract {
+        border-radius: 20pt;
+    }
+    
+    .rih-row {
+        padding: 6px 2px;
+    }
+
+    .doctitle {
+        font-weight: 700;
+        font-size: 20px;
+    }
+
+    .reeleBookPage {
+        max-height: 356px;
+    }
+
+    .reeleInteractbutton,
+    .reeleInteractbutton_R,
+    .reeleInteractbutton_T {
+        max-width: 80px;
+        gap: 0;
+    }
+
+    .reeleInteracttitle {
+        overflow: hidden;
+        width: 0;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .reeleBookPage {
+        max-height: 256px;
+    }
+}

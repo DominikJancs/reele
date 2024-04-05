@@ -19,7 +19,8 @@
   height: var(--list-item-h);
 }
 
-.dropdown-content {
+.dropdown-content,
+.two-dropdown-content {
   display: flex;
   flex-direction: column;
   position: absolute;
@@ -37,12 +38,14 @@
   z-index: 5;
 }
 
-.dropdown-content .list-item p {
+.dropdown-content .list-item p,
+.two-dropdown-content .list-item p {
   transition: all .5s ease;
   color: var(--pale-red);
 }
 
-.dropdown-content .list-item {
+.dropdown-content .list-item,
+.two-dropdown-content .list-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -58,12 +61,20 @@
   height: calc((3 * var(--list-item-h)) + (2 * var(--border-default-width)));
 }
 
-.dropdown-content .list-item:hover {
+.dropdown:hover .two-dropdown-content {
+  visibility: visible;
+  height: calc((2 * var(--list-item-h)) + (2 * var(--border-default-width)));
+}
+
+
+.dropdown-content .list-item:hover,
+.two-dropdown-content .list-item:hover {
   background-color: var(--paste-gray);
   --webkit-transition: all .2s;
 }
 
-.dropdown-content .list-item:hover p {
+.dropdown-content .list-item:hover p 
+.two-dropdown-content .list-item:hover p {
   filter: brightness(126%);
   --webkit-transition: all .2s;
 }
@@ -81,6 +92,73 @@
   width: fit-content;
   transition: transform .8s ease-in-out;
   opacity: .85;
+}
+
+.orderingBT {
+  background-color: var(--bright-white);
+  border: none;
+  outline: none;
+  height: 5rem;
+  width: 2.5rem;
+  border-radius: 25px;
+  border: 2px solid var(--gray-t);
+  transition: all .3s ease;
+}
+
+.orderingBT:hover {
+  background-color: var(--gray-t);
+}
+
+.dropdown_ordering {
+  display: inline-block;
+  justify-content: center;
+  overflow: visible;
+}
+
+.dropdown_ordering div {
+  display: flex;
+  visibility: hidden;
+  color: var(--gray-t);
+  text-decoration: none;
+  padding: 10px 15px;
+  transition: all .3s ease;
+  cursor: pointer;
+}
+
+.dropdown_ordering div:hover {
+  color: var(--bright-red);
+}
+
+.ordering_content {
+  transition: all .5s ease;
+}
+
+.dropdown_ordering .ordering_content {
+  display: flex;
+  flex-direction: column;
+  height: 0rem;
+  visibility: hidden;
+  overflow: hidden;
+  position: absolute;
+  background-color: var(--bright-white);
+  border: 2px solid var(--gray-t);
+  border-radius: 25px;
+  margin: 2px;
+  padding: 0;
+  z-index: 99;
+  box-shadow: var(--light-shadow-all);
+  -webkit-box-shadow: var(--light-shadow-all);
+  -moz-box-shadow: var(--light-shadow-all);
+
+}
+
+.dropdown_ordering:hover .ordering_content {
+  height: 138px;
+  visibility: visible;
+}
+
+.dropdown_ordering:hover div {
+  visibility: visible;
 }
 
 @media screen and (max-width: 600px) {

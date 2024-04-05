@@ -137,33 +137,6 @@
   outline: none;
 }
 
-.editBt, .acBt {
-  height: 85%;
-  width: 65px;
-  margin: 2px;
-  border: none;
-  outline: none;
-  padding: 0px 2px;
-  font-weight: 600;
-  color: var(--bright-white);
-  background-color: var(--bright-red);
-  border-radius: 6pt;
-  box-shadow: var(--light-shadow-all);
-  -webkit-box-shadow: var(--light-shadow-all);
-  -moz-box-shadow: var(--light-shadow-all);
-  transition: all .5s ease;
-  opacity: .99;
-}
-
-.editBt {
-  border-radius: 4pt 6pt 6pt 4pt;
-}
-
-.editBt:hover, .acBt:hover {
-  color: var(--bright-red);
-  background-color: var(--bright-white);
-}
-
 #btBox {
   display: flex;
   align-items: center;
@@ -257,6 +230,7 @@
 #reele_l {
   width: 50%;
   border-radius: 50%;
+  background-color: transparent;
   animation-name: blinking_red_anim;
   animation-duration: 3s;
   animation-iteration-count: infinite;
@@ -270,7 +244,7 @@
 .non_sign,
 .non_log {
   overflow: hidden;
-  height: 0;
+  height: 0 !important;
   margin: 0;
 }
 
@@ -356,8 +330,8 @@
   .clubicon {display: none;}
 
   .usericon {
-    height: 3rem;
-    width: 3rem;
+    min-height: 3rem;
+    min-width: 3rem;
     background-size: 3rem;
   }
 

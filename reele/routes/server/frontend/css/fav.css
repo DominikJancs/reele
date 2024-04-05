@@ -44,6 +44,71 @@
     background-image: url('../custom-feather/reele-fav.svg');
 }
 
+.fa-regist {
+    background-image: url('../custom-feather/file-text.svg');
+}
+
+.fa-login {
+    background-image: url('../custom-feather/log-in.svg');
+}
+
+.fa-clipboard {
+    background-image: url('../custom-feather/clipboard.svg');
+    animation-name: rotate_slow;
+}
+
+.fa-classic {
+    background-image: url('../custom-feather/violin.svg');
+}
+
+.fa-action {
+    background-image: url('../custom-feather/action.svg');
+}
+
+.fa-comedy {
+    background-image: url('../custom-feather/comedy.svg');
+}
+
+.fa-crime {
+    background-image: url('../custom-feather/crime.svg');
+}
+
+.fa-drama {
+    background-image: url('../custom-feather/drama.svg');
+}
+
+.fa-sci-fi {
+    background-image: url('../custom-feather/sci_fi.svg');
+}
+
+.fa-western {
+    background-image: url('../custom-feather/western.svg');
+}
+
+.fa-teaching {
+    background-image: url('../custom-feather/academic.svg');
+}
+
+.fa-nature {
+    background-image: url('../custom-feather/mountains.svg');
+}
+
+.fa-libra {
+    background-image: url('../custom-feather/libra.svg');
+}
+
+.fa-group {
+    background-image: url('../custom-feather/group.svg');
+}
+
+.fa-big-brother {
+    background-image: url('../custom-feather/big_brother.svg');
+}
+
+.fa-reele-mini {
+    background-image: url('../custom-feather/mini_reele_gray.svg');
+}
+
 .fa-knob-l, .fa-knob-r, .fa-knob-mini {
     background-image: url('../custom-feather/knob.svg');
     background-position: bottom;
@@ -66,7 +131,8 @@
     width: 1.5rem;
 }
 
-.fa-mail, .fa-book, .fa-key , .fa-alert, .fa-logout, .fa-settings, .fa-reeled, .fa-club, .fa-srch-gray, .fa-reele {
+.fa-mail, .fa-book, .fa-key , .fa-alert, .fa-logout, .fa-settings, .fa-reeled, .fa-club, .fa-srch-gray, .fa-reele, .fa-clipboard, .fa-regist, .fa-login, .fa-libra, .fa-group,
+.fa-action, .fa-classic, .fa-comedy, .fa-crime, .fa-drama, .fa-sci-fi, .fa-western, .fa-teaching, .fa-nature, .fa-big-brother, .fa-reele-mini {
     display: flex;
     height: 24px;
     width: 24px;
@@ -77,18 +143,29 @@
     opacity: .9;
 }
 
-.fa-mail, .fa-book, .fa-key {
+.fa-big-brother {
+    height: 32px;
+    width: 32px;  
+}
+
+.fa-mail, .fa-book, .fa-key, .fa-regist, .fa-libra {
     animation-name: fav-floating-vertical;
 }
 
-.fa-logout {
+.fa-logout, .fa-login {
     animation-name: fav-floating-horizontal;
 }
 
-.fa-mail, .fa-book, .fa-key, .fa-logout{
+.fa-mail, .fa-book, .fa-key, .fa-logout, .fa-clipboard, .fa-regist, .fa-login, .fa-libra {
     animation-duration: 2s;
     animation-iteration-count: infinite;
     animation-timing-function: ease-in-out;
+}
+
+@keyframes rotate_slow {
+    0% {-webkit-transform: rotate(0deg);}
+    50% {-webkit-transform: rotate(180deg);}
+    100% {-webkit-transform: rotate(360deg);}
 }
 
 @keyframes blinker {

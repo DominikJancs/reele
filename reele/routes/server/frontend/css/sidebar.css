@@ -20,11 +20,61 @@
 
 .slide-row {
     display: flex;
+    position: relative;
     padding: 0 5px;
     margin: 25px 0;
     height: fit-content;
     width: 100%;
     z-index: 4;
+}
+
+.slide-content {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    height: 100%;
+    width: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.slide-content::-webkit-scrollbar {
+    display: none;
+}
+
+.slide-content-s {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    height: 50%;
+    width: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.slide-content-s::-webkit-scrollbar {
+    display: none;
+}
+
+.reele-mini-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: fit-content;
+    width: 100%;
+    margin: 5px auto;
+    gap: 5px;
+}
+
+.reele-mini-cover {
+  display: flex;
+  height: 15rem;
+  width: auto;
+  border-radius: 5px;
+  box-shadow: var(--light-shadow-out);
+  -webkit-box-shadow: var(--light-shadow-out);
+  -moz-box-shadow: var(--light-shadow-out);
+  cursor: pointer;
 }
 
 #left-sidebar-bx,
@@ -141,7 +191,7 @@
     position: relative;
     height: 100%;
     width: 20rem;
-    background-color: var(--bright-white-solid);
+    background-color: transparent;
     background-image: url('../assets/wood-texture-h.webp');
     background-position: fixed;
     background-size: cover;
@@ -163,6 +213,53 @@
     border-radius: 3.5rem 0 0 3.5rem;
 }
 
+.clubs-disp-bx {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    gap: 5px;
+}
+
+.clubs-disp-bx::-webkit-scrollbar {
+    display: none;
+}
+
+.clubItemLine {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: fit-content;
+    width: 100%;
+    padding: 0 20px;
+    margin: 10px 0;
+    cursor: pointer;
+}
+
+.clubItemBx {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: fit-content;
+    width: fit-content;
+    gap: 30px;
+    pointer-events: none;
+}
+
+.award-circle {
+    display: flex;
+    height: 1.5rem;
+    width: 1.5rem;
+    background-color: var(--mid-gray-t);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 3.5rem;
+    border-radius: 50%;
+    border: 3px solid var(--gray);
+}
+
 .slide-content-l,
 .slide-content-r {
     display: none;
@@ -170,6 +267,24 @@
     height: 100%;
     width: 100%;
     padding: 3rem 25px;
+}
+
+.slider-content-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: fit-content;
+    width: 100%;
+    margin: 4px 0;
+}
+
+.slider-content-title-bx {
+    display: flex;
+    height: fit-content;
+    width: fit-content;
+    align-items: center;
+    justify-content: space-around;
+    gap: 15px;
 }
 
 .side-indicator-bx {
@@ -186,6 +301,16 @@
     display: flex;
     top: 0;
     height: 5rem;
+    width: 2.4rem;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 2.4rem;
+}
+
+.side-icon-bx {
+    display: flex;
+    top: 0;
+    height: 2.4rem;
     width: 2.4rem;
     background-position: center;
     background-repeat: no-repeat;
@@ -234,6 +359,10 @@
 
 .club-icon {
     background-image: url('../assets/club-icon-a.svg');
+}
+
+.club-icon-gray {
+    background-image: url('../assets/club-gray.svg');
 }
 
 .reele-icon {
@@ -286,8 +415,8 @@
     .slide:hover .vertical-base {height: 0; visibility: hidden;}
     .slide:hover #r-side-ind-titl {margin: 0;}
     .slide:hover .horizontal-base {margin: 0 6px 0 12px;}
-    .slide:hover .slide-content-l {display: flex;}
-    .slide:hover .slide-content-r {display: flex;}
+    .slide:hover .slide-content-l {display: flex; flex-direction: column;}
+    .slide:hover .slide-content-r {display: flex; flex-direction: column;}
     .slide-bx {padding: 1.5rem 0;}
     .sidebar-bt-row {display: none; height: 0;}
     .vertical-base,
@@ -298,8 +427,8 @@
 @media only screen and (max-width: 1200px) {
     .slide-bx {width: 0rem; visibility: hidden;}
     .slide-bx.open {visibility: visible;}
-    .slide-content-r {display: flex; padding: 0 5px 0 50px;}
-    .slide-content-l {display: flex; padding: 0 50px 0 5px;}
+    .slide-content-r {display: flex; flex-direction: column; padding: 0 5px 0 50px;}
+    .slide-content-l {display: flex; flex-direction: column; padding: 0 50px 0 5px;}
     .horizontal-base {display: none;}
     .side-icon-h-bx {display: none;}
     .side-indicator-bx {max-width: 5rem; right: 0;}

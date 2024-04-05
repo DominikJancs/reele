@@ -1,0 +1,431 @@
+#doc-bx {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    height: fit-content;
+    align-items: center;
+    min-height: 45rem;
+    width: 100%;
+    padding: 15px;
+    background-image: url('../assets/wood-texture-h.webp');
+    background-position: fixed;
+    background-size: 45rem;
+    background-repeat: repeat;
+    background-color: var(--bright-white-t);
+    border-radius: 25pt;
+    border: 8px solid var(--bright-white);
+    overflow: hidden;
+    box-shadow: var(--light-shadow-reversed);
+    -webkit-box-shadow: var(--light-shadow-reversed);
+    -moz-box-shadow: var(--light-shadow-reversed);
+    overflow: hidden;
+    gap: 10px;
+}
+
+.doc-header {
+    display: flex;
+    height: fit-content;
+    width: 100%;
+    padding: 0 35px;
+    z-index: 3;
+}
+
+.doc-author {
+    display: flex;
+    height: fit-content;
+    align-items: center;
+    width: fit-content;
+    padding: 0 35px;
+    z-index: 3;
+    gap: 10px;
+}
+
+.doc-split {
+    display: flex;
+    height: fit-content;
+    width: 100%;
+    padding: 15px;
+    z-index: 3;
+    gap: 45px;
+    overflow: hidden;
+}
+
+.doc-split-r {
+    display: flex;
+    justify-content: end;
+    height: 10rem;
+    width: 100%;
+    padding: 15px;
+    z-index: 3;
+    gap: 45px;
+}
+
+#reele-cover {
+    height: 10rem;
+    width: 7rem;
+    border-radius: 5px;
+    border: 2px solid var(--bright-white);
+}
+
+.reele-interactbx {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 10rem;
+    width: fit-content;
+}
+
+.reele-interactbx-r {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+    width: fit-content;  
+}
+
+.reele-interact-row {
+    display: flex;
+    align-items: center;
+    height: fit-content;
+    width: fit-content;
+    gap: 15px;
+}
+
+.reele-interact-ind {
+    display: flex;
+    align-items: center;
+}
+
+#reele-title {
+    display: flex;
+    flex-direction: column;
+}
+
+.reele_interact_inf {
+    display: flex;
+    flex-direction: column;
+}
+
+.content-footer {
+    display: flex;
+    position: relative;
+    height: fit-content;
+    height: fit-content;
+    width: 100%;
+    padding: 15px;
+    overflow: hidden;
+    gap: 10px;
+}
+
+.content-footer-s {
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    width: 50%;
+}
+
+.thoughtsbox {
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    width: 100%;
+    background-color: var(--bright-gray-t);
+    border-radius: 25pt;
+    overflow: hidden;
+}
+
+.thoughts_inp_bx {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 10px 5px;
+    height: 4rem;
+    width: 100%;
+    border-radius: 25pt;
+    background-color: var(--bright-white);
+    box-shadow: var(--light-shadow-all);
+    -webkit-box-shadow: var(--light-shadow-all);
+    -moz-box-shadow: var(--light-shadow-all);
+    gap: 45px;
+}
+
+#thought_inp {
+    height: 100%;
+    max-width: 30rem;
+    width: 100%;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    color: var(--gray-t);
+    font-weight: 600;
+    transition: all .5s ease;
+}
+
+#sendThought {
+    background-color: transparent;
+    outline: none;
+    border: none;
+    height: 45px;
+    width: 45px;
+    background-image: url('../assets/desend_arrow.svg');
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+#sendThought:hover {
+    background-image: url('../assets/send_arrow.svg');
+    animation-name: shake;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+
+#openThoughts {
+    position: absolute;
+    right: 0;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    height: 25px;
+    width: 25px;
+    margin: 0 15px 0 0;
+    background-image: url('../assets/arrow_bottom.svg');
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+#openThoughts:hover {
+    animation-name: shake-vertical;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+
+.page_index {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all .5s ease;
+}
+
+.indexBX,
+.indexBX-bookmarks {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: fit-content;
+    width: fit-content;
+    padding: 2px 10px;
+    border-radius: 25px;
+    box-shadow: var(--light-shadow-reversed);
+    -webkit-box-shadow: var(--light-shadow-reversed);
+    -moz-box-shadow: var(--light-shadow-reversed);
+    color: var(--mid-gray);
+    font-weight: 600;
+    background-color: var(--gray-t);
+    cursor: pointer;
+    transition: all .3s ease;
+}
+
+.indexBX:hover,
+.indexBX-bookmarks:hover {
+    background-color: var(--mid-gray);
+    color: var(--gray-t);
+}
+
+.indexBX-bookmarks {
+    position: absolute;
+    right: 0;
+    z-index: 3;
+    margin: 15px;
+}
+
+.indexCL {
+    height: 20px;
+    width: 20px;
+    background-color: var(--mid-gray);
+    border-radius: 50%;
+    background-image: url('../assets/mini_x.svg');
+    background-position: fixed;
+    background-size: contain;
+    background-repeat: no-repeat;
+    transition: all .3s ease;
+    cursor: pointer;
+}
+
+.indexCL:hover {
+    filter: brightness(150%);
+}
+
+.thoughts_msg_bx {
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    width: 100%;
+    margin: 20px 0;
+}
+
+.thoughts_msg_bx.hidden {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+
+.thoughts_item,
+.thoughts_item_prev {
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    margin:  10px 0;
+    width: 100%;
+}
+
+.thought_row {
+    display: flex;
+    height: fit-content;
+    justify-content: space-between;
+    width: 100%;
+    padding: 5px 55px;
+    gap: 25px;
+}
+
+.thought_inf {
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    width: fit-content;
+}
+
+.user_thought_inf {
+    display: flex;
+    gap: 15px;
+}
+
+.thoughts_content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.voteBX {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 5px;
+    background-color: var(--bright-white-t);
+    border-radius: 25pt;
+    padding: 0 5px;
+    box-shadow: var(--light-shadow-reversed);
+    -webkit-box-shadow: var(--light-shadow-reversed);
+    -moz-box-shadow: var(--light-shadow-reversed);
+}
+
+.contextBX {
+    display: flex;
+    height: fit-content;
+    width: 100%;
+    text-wrap: wrap;
+}
+
+.downVoteBT, .upVoteBT {
+    height: 30px;
+    width: 30px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    transition: all .3s ease;
+    cursor: pointer;
+}
+
+.downVoteBT {
+    background-image: url('../assets/deactivated_down_vote.svg');
+}
+
+.upVoteBT {
+    background-image: url('../assets/deactivated_up_vote.svg');
+}
+
+.downVoteBT:hover {
+    background-image: url('../assets/down_vote.svg');
+}
+
+.upVoteBT:hover {
+    background-image: url('../assets/up_vote.svg');
+}
+
+.downVoteAct {
+    background-image: url('../assets/down_vote.svg');
+}
+
+.upVoteAct {
+    background-image: url('../assets/up_vote.svg');
+}
+
+.downVoteAct:hover {
+    background-image: url('../assets/deactivated_down_vote.svg') !important;
+}
+
+.upVoteAct:hover {
+    background-image: url('../assets/deactivated_up_vote.svg') !important;
+}
+
+#bookmarks {
+    gap: 20px;
+}
+
+@keyframes shake {
+    0% { transform: translatex(0px); }
+    50%  { transform: translateX(10px); }
+    100%   { transform: translateX(0); }     
+}
+
+@keyframes shake-vertical {
+    0% { transform: translateY(0px); }
+    50%  { transform: translateY(5px); }
+    100%   { transform: translateY(0); }     
+}
+
+@media screen and (max-width: 1024px) {
+    .doc-header {
+        flex-direction: column;
+        padding: 0;
+    }
+
+    .doc-split-r {
+        justify-content: left;
+    }
+
+    .content-footer {
+        flex-direction: column;
+        padding: 0;
+    }
+    
+    .content-footer-s {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .thoughts_inp_bx {
+        gap: 25px;
+    }
+
+    .doc-split {
+        flex-direction: column;
+        padding: 0;
+        gap: 10px;
+    }
+
+    .reele-interactbx {
+        gap: 10px;
+    }
+
+    .doc-author {
+        padding: 5px;
+    }
+}

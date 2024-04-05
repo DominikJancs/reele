@@ -1,0 +1,54 @@
+.editBt, .acBt {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 85%;
+    width: fit-content;
+    min-width: 65px;
+    margin: 2px;
+    border: none;
+    outline: none;
+    padding: 0px 12px;
+    font-weight: 600;
+    color: var(--bright-white);
+    background-color: var(--bright-red);
+    border-radius: 6pt;
+    box-shadow: var(--light-shadow-all);
+    -webkit-box-shadow: var(--light-shadow-all);
+    -moz-box-shadow: var(--light-shadow-all);
+    transition: all .5s ease;
+    opacity: .99;
+    gap: 5px;
+  }
+
+  .acBt {
+    padding: 5px;
+    font-size: 12pt;
+    max-height: 2rem;
+    margin: 10px;
+  }
+  
+  .editBt {
+    border-radius: 4pt 6pt 6pt 4pt;
+  }
+  
+  .editBt:hover, .acBt:hover {
+    color: var(--bright-red);
+    background-color: var(--bright-white);
+  }
+
+  #description_tb {
+    width: 100%;
+    border: 4px solid var(--bright-red);
+    background-color: var(--brighter-gray);
+    border-radius: 8pt;
+    outline: none;
+    color: var(--bright-white);
+    font-weight: 600;
+    font-size: 12pt;
+    padding: 10px;
+    margin: 10px;
+    box-shadow: var(--light-shadow-out);
+    -webkit-box-shadow: var(--light-shadow-out);
+    -moz-box-shadow: var(--light-shadow-out);
+}
