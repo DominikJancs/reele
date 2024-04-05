@@ -1,9 +1,13 @@
 const thoughtsContent = document.querySelector('.thoughts_content');
 
+// Gondolatok generálása és hozzáadása a gondolatok tartalomhoz
 function generateThought(data) {
+    // A gondolat időbélyegének formázása
     const thoughtTime = new Date(data.thoughted).toLocaleString(),
+    // Az oldalfejléc indexeinek lekérdezése
           headerIndexes = document.querySelector('#header-pages').getAttribute('data-pages');
 
+          // Az új gondolat HTML kódja
     const newThought = `
     <div class="thoughts_item">
         <div class="thought_row">
@@ -30,12 +34,16 @@ function generateThought(data) {
     <span class="line-vertical"></span>
     `;
 
+    // Az új gondolat hozzáadása a gondolatok tartalmához
     thoughtsContent.innerHTML += newThought;
 }
 
+// Gondolatok eltávolítása a gondolatok tartalmából
 function removeThought() {
+    // Gondolatok és a hozzájuk tartozó függőleges vonalak kiválasztása
     var thoughtItem = document.querySelectorAll('.thoughts_item');
     var verticalLines = document.querySelectorAll('.line-vertical');
+    // Az összes gondolat és függőleges vonal eltávolítása
     thoughtItem.forEach(element => {
         element.remove();
     });

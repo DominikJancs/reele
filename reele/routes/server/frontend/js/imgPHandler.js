@@ -1,22 +1,29 @@
+// Maximális fájlméret
 const maxFileSize = 2 * 1024 * 1024,
+// Borító kép input mező lekérése
       pCoverInp = document.querySelector('#p_cover'),
+      // Engedélyezett kiterjesztések
       allowedExts = [
     'image/jpg',
     'image/jpeg',
     'image/png'
 ];
+// Borító kép elem lekérése
 var pCover = document.querySelector('#post_cover'),
+// Borító cím elem lekérése
     coverTitle = document.querySelector('#cover_title');
 
-// Load preview image
+// Kép előnézet betöltése
 pCoverInp.addEventListener("change", (event) => {
-    //const imgTit = document.querySelector('#imgTitle');
+    // Fájl lekérése
     var file = event.target.files[0],
         msg = null,
         chkImg = checkImg(file).chk,
         chkMsg = checkImg(file).msg;
 
+        // Ha a kép megfelel a feltételeknek
     if (chkImg) {
+        // Borítókép beállítása és megfelelő formázása
         pCover.style.backgroundImage = "url("+URL.createObjectURL(file)+")";
         pCover.onload = function () {
             URL.revokeObjectURL(pCover.style.backgroundImage);
@@ -26,19 +33,21 @@ pCoverInp.addEventListener("change", (event) => {
         $('#post_cover').css({ 'margin': '0', 'background-size': 'cover'});
     }
     else {
+        // Ha a feltételek nem teljesülnek, hibaüzenet megjelenítése és alapértelmezett állapot visszaállítása
         msg = `Incorrect ${chkMsg} ✘...`;
         resetDefCo();
     }
     replaceMsg(msg);
 });
 
-// Reset cover
+// Alapértelmezett állapot visszaállítása
 function resetDefCo() {
     pCover.removeAttribute('style');
     coverTitle.classList.remove('hidden');
     pCoverInp.value = null;
 }
 
+// Kép ellenőrzése
 function checkImg(img) {
     const fileType = img.type;
     const fileSize = img.size;
@@ -48,6 +57,7 @@ function checkImg(img) {
     else return {chk: false, msg: "file type"};
 }
 
+// Üzenet cseréje
 function replaceMsg(msg) {
     (replaceMsgBx.classList.add('hoppon'),
         replaceMsgTit.innerText = msg,

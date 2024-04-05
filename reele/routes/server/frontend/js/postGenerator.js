@@ -1,8 +1,11 @@
 const sliderBody = document.querySelector('#slider_body');
 
+// Függvény a bejegyzések generálásához
 function generatePost(data) {
+    // Bejegyzés megosztásának idejének formázása
     const shareTime = new Date(data.sharetime).toLocaleString();
 
+    // Új bejegyzés létrehozása HTML formátumban
     const newPost = `
         <div class="reeleItemBx">
             <div class="reeleItemInteract">
@@ -50,9 +53,11 @@ function generatePost(data) {
         </div>
     `;
 
+    // Új bejegyzés hozzáadása a slider testéhez
     sliderBody.innerHTML += newPost;
 }
 
+// Bejegyzések eltávolítása
 function removePost() {
     var reeleItem = document.querySelectorAll('.reeleItemBx');
     reeleItem.forEach(element => {

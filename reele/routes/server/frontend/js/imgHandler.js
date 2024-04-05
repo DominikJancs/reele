@@ -28,6 +28,7 @@ uIconInp.addEventListener("change", (event) => {
     }
 });
 
+// A kép leellenőrzése
 function checkImg(img) {
     const fileType = img.type;
     const fileSize = img.size;
