@@ -1,0 +1,8 @@
+.prev-page {
+    display: flex;
+    position: relative;
+    width: 100%;
+    border-radius: 15px;
+    border: 2pt solid var(--bright-red);
+    z-index: 1;
+}
