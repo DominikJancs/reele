@@ -23,16 +23,20 @@ document.addEventListener("click", (event) => {
 });
 
 // Klubprofil eseményfigyelője
-clubProfile.addEventListener("click", (event) => {
-    // Átirányítás a megfelelő kluboldalra
-    redirect(`/club/${event.target.getAttribute('data-club')}`);
-});
+try {
+    clubProfile.addEventListener("click", (event) => {
+        // Átirányítás a megfelelő kluboldalra
+        redirect(`/club/${event.target.getAttribute('data-club')}`);
+    });
+} catch {
+    
+}
 
 // A bejegyzés jelentésére vonatkozó műveleteket végző függvény.
 function flagAction(post) {
     let CurrStatusCode = null;
     // POST kérés küldése a bejegyzés jelentése céljából.
-    postData(`http://192.168.0.143:8000/api/posts/flag/${post.getAttribute('data-post')}`, {})
+    postData(`http://localhost:8000/api/posts/flag/${post.getAttribute('data-post')}`, {})
         .then((response) => {
             CurrStatusCode = response.status;
             return response.json()
@@ -49,7 +53,7 @@ function flagAction(post) {
 function reeleAction(post) {
     let CurrStatusCode = null;
     // POST kérés küldése a reele művelet végrehajtásához.
-    postData(`http://192.168.0.143:8000/api/posts/reele/${post.getAttribute('data-post')}`, {})
+    postData(`http://localhost:8000/api/posts/reele/${post.getAttribute('data-post')}`, {})
         .then((response) => {
             CurrStatusCode = response.status;
             return response.json()
@@ -67,7 +71,7 @@ function reeleAction(post) {
 function bookMarkAction(e) {
     let CurrStatusCode = null;
     // POST kérés küldése a könyvjelzőzés műveletéhez.
-    postData(`http://192.168.0.143:8000/api/posts/bookmark/${reel}`, { page: e.target.getAttribute('data-page') })
+    postData(`http://localhost:8000/api/posts/bookmark/${reel}`, { page: e.target.getAttribute('data-page') })
         .then((response) => {
             CurrStatusCode = response.status;
             return response.json()
