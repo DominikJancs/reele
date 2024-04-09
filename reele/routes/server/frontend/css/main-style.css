@@ -35,10 +35,6 @@ body {
     background-color: var(--brighter-gray);
 }
 
-label {
-    overflow: hidden;
-}
-
 svg {
     transition: all .3s ease;
     pointer-events: none;
