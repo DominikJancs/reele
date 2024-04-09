@@ -36,7 +36,7 @@
                 <div class="dropdown">
                     <div class="usermenu">
                         {{#if exist}}<div class="usericon"
-                            style='background-image: url("http://192.168.0.143:8000/u/profiles/picture/{{data.username}}")'
+                            style='background-image: url("http://localhost:8000/u/profiles/picture/{{data.username}}")'
                             title="{{data.username}}"></div>
                         {{else}}
                         <div class="usericon" style='background-image: url("../assets/plus_user.webp")'
@@ -200,14 +200,14 @@
                     <div class="clubinfGROUP">
                         <div class="clubinfROW">
                             <div class="clubprofile"
-                                style='background-image: url("http://192.168.0.143:8000/c/clubprofiles/picture/{{clubData.clubname}}")'
+                                style='background-image: url("http://localhost:8000/c/clubprofiles/picture/{{clubData.clubname}}")'
                                 title="{{clubData.clubname}}"></div>
                             <button id="joinBT" data-club="{{clubData.clubname}}">Join</button>
                         </div>
                         <div class="clubinfROW"><label id="clubnametitle">{{clubData.clubname}}</label></div>
                     </div>
                     <div id="bannerbx"
-                        style='background-image: url("http://192.168.0.143:8000/c/clubbanners/picture/{{clubData.clubname}}");'>
+                        style='background-image: url("http://localhost:8000/c/clubbanners/picture/{{clubData.clubname}}");'>
                     </div>
                 </div>
                 <div class="dropdown_ordering">
@@ -295,6 +295,7 @@
     <script src="../mini-router/redirect.js"></script>
     <script src="../mini-router/hHandler.js"></script>
     <script src="../mini-router/postGetC.js"></script>
+    <script src="../mini-router/goBack.js"></script>
     <script src="../mini-router/routescript.js"></script>
     <script src="../mini-router/makeClub.js"></script>
     <script src="../mini-router/joinHandler.js"></script>
