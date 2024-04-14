@@ -12,8 +12,6 @@
   text-decoration-thickness: 2px;
 }
 
-/* User-interaction */
-
 .container_cont {
   display: flex;
   height: 100dvh;
@@ -104,8 +102,6 @@
   margin: 15px 0px;
   transition: height 1s;
 }
-
-/* inputs */
 
 .inptx_box {
   display: inline-block;
@@ -206,7 +202,6 @@
   background-color: var(--brighter-gray);
 }
 
-/* IDs */
 #reele_banner_qu {
   font-weight: bold;
   color: var(--brighter-gray);
