@@ -29,14 +29,13 @@
             <div class="srchbarbx">
                 <i class="fa-srch-gray"></i>
                 <input class="srchinp" type="text" placeholder="Search...">
-                <!-- <button class="srchbt"></button> -->
             </div>
             <div id="userinfobx">
                 {{#if exist}}<div class="clubicon" title="Manage a club(s)..."></div>{{/if}}
                 <div class="dropdown">
                     <div class="usermenu">
                         {{#if exist}}<div class="usericon"
-                            style='background-image: url("http://192.168.0.143:8000/u/profiles/picture/{{data.username}}")'
+                            style='background-image: url("http://localhost:8000/u/profiles/picture/{{data.username}}")'
                             title="{{data.username}}"></div>
                         {{else}}
                         <div class="usericon" style='background-image: url("../assets/plus_user.webp")'
@@ -156,8 +155,6 @@
                         <p id="l-side-ind-titl" class="vertical-base side-ind-tit reverse">Clubs</p>
                     </div>
 
-
-                    <!-- Slider content -->
                     <div class="slide-content-l">
                         <div class="slide-row">
                             <div class="srchbarbx">
@@ -227,7 +224,6 @@
                         </div>
                     </div>
 
-                    <!-- Slider content -->
                     <div class="slide-content-r">
                         <div class="slide-row">
                             <div class="srchbarbx">
@@ -242,7 +238,6 @@
         </div>
     </main>
 
-    <!-- Footer -->
     <div id="fPadding"></div>
     <footer class="reele_footer-sidebar">
         <div id="sidebar-bt-bx-l" class="sidebar-bt-row">
@@ -267,7 +262,6 @@
         </div>
     </footer>
 
-    <!-- scripts-->
     {{#if exist}}
     <script src="../mini-router/hLog.js"></script>
     <script src="../mini-router/makeClub.js"></script>

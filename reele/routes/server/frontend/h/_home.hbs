@@ -16,7 +16,6 @@
 
 <body>
 
-    <!-- Navbar -->
     <div id="headbar">
         <div id="navbar">
             <div id="logoContainer">
@@ -26,14 +25,13 @@
             <div class="srchbarbx">
                 <i class="fa-srch-gray"></i>
                 <input class="srchinp" type="text" placeholder="Search...">
-                <!-- <button class="srchbt"></button> -->
             </div>
             <div id="userinfobx">
                 <div class="clubicon" title="Manage a club(s)..."></div>
                 <div class="dropdown">
                     <div class="usermenu">
                         <div class="usericon"
-                            style='background-image: url("http://192.168.0.143:8000/u/profiles/picture/{{data.username}}")'
+                            style='background-image: url("http://localhost:8000/u/profiles/picture/{{data.username}}")'
                             title="{{data.username}}"></div>
                         <div class="arrbx">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 800 200">
@@ -80,7 +78,6 @@
         </div>
     </div>
 
-    <!-- Container -->
     <div id="container">
             <div id="left-sidebar-bx">
                 <div id="left-slide" class="sidebar-bx"></div>
@@ -91,7 +88,6 @@
             </div>
     </div>
 
-    <!-- Footer -->
     <div class="footer">
         <div class="bottom-nav">
             <div id="sidebar-bt-bx-l" class="sidebar-bt-bx">
@@ -130,7 +126,6 @@
         </div>
     </div>
 
-    <!-- scripts-->
     <script src="../js/searchbarMech.js"></script>
     <script src="../mini-router/redirect.js"></script>
     <script src="../mini-router/hHandler.js"></script>
