@@ -1,7 +1,6 @@
-// Aszinkron adatok küldése POST kéréssel JSON formátumban
 async function postData(url = "", data = {}) {
     const response = await fetch(url, {
-        method: "POST", // POST, PUT, DELETE ...       
+        method: "POST",     
         headers: {
             "Content-Type": "application/json",
         },
@@ -10,32 +9,29 @@ async function postData(url = "", data = {}) {
     return response;
 };
 
-// Aszinkron adatok küldése POST kéréssel űrlap adattípussal
 async function postForm(url = "", img) {
     const formData = new FormData();
     formData.append('icon', img);
 
     const response = await fetch(url, {
-        method: "POST", // POST, PUT, DELETE ...       
+        method: "POST",      
         body: formData,
     });
     return response;
 }; 
 
-// Aszinkron adatok küldése POST kéréssel űrlap adattípussal és céllal
 async function postDataForm(url = "", target, file) {
     const formData = new FormData();
     formData.append('target', target);
     formData.append('icon', file);
 
     const response = await fetch(url, {
-        method: "POST", // POST, PUT, DELETE ...   
+        method: "POST",
         body: formData,
     });
     return response;
 }; 
 
-// Aszinkron adatok küldése POST kéréssel űrlap adattípussal és több fájllal
 async function postDatasForm(url = "", data = [], file, file_2) {
     const formData = new FormData();
     formData.append('data', data);
@@ -43,16 +39,15 @@ async function postDatasForm(url = "", data = [], file, file_2) {
     formData.append('file', file_2);
 
     const response = await fetch(url, {
-        method: "POST", // POST, PUT, DELETE ...   
+        method: "POST", 
         body: formData,
     });
     return response;
 }; 
 
-// Aszinkron GET kérés küldése
 async function get(url = "") {
     const response = await fetch(url, {
-        method: "GET", // POST, PUT, DELETE ...  
+        method: "GET",
         headers: {
             "Content-Type": "application/json",
         }
@@ -60,10 +55,9 @@ async function get(url = "") {
     return response.json();
 } 
 
-// Aszinkron GET kérés küldése
 async function getData(url = "") {
     const response = await fetch(url, {
-        method: "GET", // POST, PUT, DELETE ...  
+        method: "GET", 
     })
     return response;
 } 
