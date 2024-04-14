@@ -2,8 +2,6 @@ describe('template spec', () => {
 
   const emailJo = "User@gmail.com";
   const emailJoVolt = "email@email.com";
-  //Email was already taken!
-  //Username was already taken!
   const jelszoJo = "Email123@";
   const userName = "UserName";
   const userNameVolt = "Email";
