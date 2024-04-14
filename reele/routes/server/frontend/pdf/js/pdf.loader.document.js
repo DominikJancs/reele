@@ -14,7 +14,7 @@ function resetCurrentPDF() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  getData(`http://192.168.0.143:8000/posts/file/${header}`).then((data) => {
+  getData(`http://localhost:8000/posts/file/${header}`).then((data) => {
     getBookmarks(header).then((bookmarks) => {
       const pdfFile = pdfjsLib.getDocument(data);
       resetCurrentPDF();
@@ -114,7 +114,7 @@ function renderBookMark(page, i) {
 async function getBookmarks(header) {
   try {
     const response = await getData(
-      `http://192.168.0.143:8000/posts/bookmark/${header}`
+      `http://localhost:8000/posts/bookmark/${header}`
     );
     const data = await response.json();
     return data;
