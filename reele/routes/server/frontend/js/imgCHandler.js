@@ -9,7 +9,6 @@ const maxFileSize = 2 * 1024 * 1024,
 var ucBanner = document.querySelector('#club_banner_bg'),
 ucIcoImg = document.querySelector('#ccico_img');
 
-// Előnézeti kép betöltése 
 cIconInp.addEventListener("change", (event) => {
     const imgTit = document.querySelector('#imgTitle');
     var file = event.target.files[0],
@@ -39,7 +38,6 @@ function checkImg(img) {
     else return {chk: false, msg: "file type"};
 }
 
-// Load preview image
 cBannerInp.addEventListener("change", (event) => {
     const imgTit = document.querySelector('#imgTitle');
     var file = event.target.files[0],
@@ -60,13 +58,11 @@ cBannerInp.addEventListener("change", (event) => {
     }
 });
 
-// Reset banner
 function resetDefCB() {
     ucBanner.removeAttribute('style');
     cBannerInp.value = null;
 }
 
-// Reset icon
 function resetDefCI() {
     ucIcoImg.src = "../assets/plus_group_photo.png";
     ucIcoImg.setAttribute('style', 'height: 3em; vertical-align: middle;');

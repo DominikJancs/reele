@@ -7,12 +7,10 @@ var defucImgSrc = document.querySelector('#user-profile').src;
 const swapBubble = document.querySelector('.swap-bubble');
 const replaceIc = document.querySelector('#replace_icon');
 
-// Eseményfigyelők hozzáadása az interakciós gombokhoz
 interBT.forEach(element => element.addEventListener('click', event => {
     (settab(event.target.id), setActive(event.target.id))
 }));
 
-// Aktív lap beállítása és megjelenítése
 function settab(btId) {
     (clearTabs(), replaceIcL.removeAttribute('for'), setDefuPRo(), setProUrl({ blob: false, src: defucImgSrc }), swapBubble.classList.remove('visible-op'));
 
@@ -34,7 +32,6 @@ function settab(btId) {
     }
 }
 
-// Alapértelmezett profilkép beállítása
 function setDefuPRo() {
     replaceInt.removeAttribute('style');
     replaceIcL.classList.remove('vibrate');
@@ -42,14 +39,12 @@ function setDefuPRo() {
     replaceIc.value = null;
 }
 
-// Profilkép URL beállítása
 function setProUrl(srcUrl) {
     var tistp = new Date().getTime();
     if (srcUrl.blob) loadBlob(srcUrl.src);
     else userProfile.src = srcUrl.src + "?t=" + tistp;
 }
 
-// Blob betöltése
 function loadBlob(blb) {
     userProfile.src = blb;
     ucProImg.src = URL.createObjectURL(blb);
@@ -58,13 +53,11 @@ function loadBlob(blb) {
     }
 }
 
-// Aktív gomb beállítása
 function setActive(btId) {
     document.querySelector('[data_selected_bt="active"]').removeAttribute('data_selected_bt');
     document.querySelector(`#${btId}`).setAttribute('data_selected_bt', 'active');
 }
 
-// Laposztályok törlése
 function clearTabs() {
     tabs.forEach((element) => {
         element.classList.add('hidden');

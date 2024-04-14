@@ -6,7 +6,6 @@ const maxFileSize = 2 * 1024 * 1024,
     'image/png'
 ];
 
-// Load preview image
 uIconInp.addEventListener("change", (event) => {
     const imgTit = document.querySelector('#u_icon_tit');
     var file = event.target.files[0],
@@ -28,7 +27,6 @@ uIconInp.addEventListener("change", (event) => {
     }
 });
 
-// A kép leellenőrzése
 function checkImg(img) {
     const fileType = img.type;
     const fileSize = img.size;

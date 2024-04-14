@@ -1,11 +1,8 @@
 const sliderBody = document.querySelector('#slider_body');
 
-// Függvény a bejegyzések generálásához
 function generatePost(data) {
-    // Bejegyzés megosztásának idejének formázása
     const shareTime = new Date(data.sharetime).toLocaleString();
 
-    // Új bejegyzés létrehozása HTML formátumban
     const newPost = `
         <div class="reeleItemBx">
             <div class="reeleItemInteract">
@@ -13,7 +10,7 @@ function generatePost(data) {
                     <div class="rih-row">
                         <div class="reeleautherbx">
                             <label class="color-b-w-t p-sub">Author: </label>
-                            <img class="profile_bx" src="http://192.168.0.143:8000/users/profilepicture/${data.Authorname}" alt="">
+                            <img class="profile_bx" src="http://localhost:8000/users/profilepicture/${data.Authorname}" alt="">
                             <label class="color-b-w-t">${data.Authorname}</label>
                             <span class="line"></span>
                         </div>
@@ -28,8 +25,8 @@ function generatePost(data) {
                 </div>
                 <div class="reeleBookBx">
                     <div data-reele="${data.documentname}" class="reeleBookCover">
-                    <div class="reeleBookBack" style="background-image: url('http://192.168.0.143:8000/posts/cover/${data.documentname}')"></div>
-                    <img class="reeleCover" src="http://192.168.0.143:8000/posts/cover/${data.documentname}" alt=""> <!-- adatok helyettesítése -->
+                    <div class="reeleBookBack" style="background-image: url('http://localhost:8000/posts/cover/${data.documentname}')"></div>
+                    <img class="reeleCover" src="http://localhost:8000/posts/cover/${data.documentname}" alt=""> <!-- adatok helyettesítése -->
                     <img class="reeleCover" src="../assets/blank_cover.png" alt="">
                     </div>
                 </div>
@@ -53,11 +50,9 @@ function generatePost(data) {
         </div>
     `;
 
-    // Új bejegyzés hozzáadása a slider testéhez
     sliderBody.innerHTML += newPost;
 }
 
-// Bejegyzések eltávolítása
 function removePost() {
     var reeleItem = document.querySelectorAll('.reeleItemBx');
     reeleItem.forEach(element => {

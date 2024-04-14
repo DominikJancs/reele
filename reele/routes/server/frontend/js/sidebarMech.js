@@ -7,12 +7,10 @@ const sideBT = document.querySelectorAll('.side-bt'),
       rightAicon = document.querySelector('#right-side-icon-a'),
       bodyClass = document.body.classList;
 
-      // Oldalsáv elemekre kattintás eseményfigyelő
 sideBT.forEach(element => element.addEventListener('click', event => {
     if (window.innerWidth < 1200) sideBarAct(event);
 }));
 
-// Oldalsáv működésének kezelése
 function sideBarAct(e) {
     clearAlayer();
     const sideID = e.target.id;
@@ -27,21 +25,18 @@ function sideBarAct(e) {
     }
 }
 
-// Oldalsáv elemek átlátszóságának törlése
 function clearAlayer() {
     sideAicon.forEach(sideAiconElement => {
         sideAiconElement.classList.remove('opacity-side-bt');
     }); 
 }
 
-// Az összes oldalsáv bezárása
 function closeall() {
     slideBX.forEach(slidebxElement => {
         slidebxElement.classList.remove('open');
     }); 
 }
 
-// A böngészőablak átméretezésének eseményfigyelője
 window.addEventListener('resize', event => {
     if (window.innerWidth > 1200) (clearAlayer(), leftSideBar.classList.remove("open"), rightSideBar.classList.remove("open"), bodyClass.remove('disscrolled'), navBarCl.remove('shrinked'), selectBarCl.remove('shrinked'));
 });
