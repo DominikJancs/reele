@@ -65,7 +65,7 @@
                 <div id="header-linear"></div>
                 <div class="doc-header">
                     <div class="doc-split">
-                        <img src="http://192.168.0.143:8000/posts/cover/{{reeleData.title}}" id="reele-cover">
+                        <img src="http://localhost:8000/posts/cover/{{reeleData.title}}" id="reele-cover">
                         <div class="reele-interactbx">
                             <div class="reele-interact-row">
                                 <div id="reele-title">
@@ -105,7 +105,7 @@
                                         <label>{{reeleData.genre}}</label>
                                     </div>
                                 </div>
-                                <a href="http://192.168.0.143:8000/posts/file/{{reeleData.title}}" download>
+                                <a href="http://localhost:8000/posts/file/{{reeleData.title}}" download>
                                     <div class="reeleInteractbutton"><img class="reeleInteractIcon"
                                             src="../assets/download.svg" alt=""></div>
                                 </a>
@@ -115,10 +115,10 @@
                 </div>
                 <div class="doc-author">
                     <p>From: </p>
-                    <img id="clubProfile" class="profile_bx" src="http://192.168.0.143:8000/c/clubprofiles/picture/{{club}}" data-club="{{club}}" alt="">
+                    <img id="clubProfile" class="profile_bx" src="http://localhost:8000/c/clubprofiles/picture/{{club}}" data-club="{{club}}" alt="">
                     <p>{{club}}</p>
                     <div id="arrow-t"></div>
-                    <img class="profile_bx" src="http://192.168.0.143:8000/users/profilepicture/{{author}}" alt="">
+                    <img class="profile_bx" src="http://localhost:8000/users/profilepicture/{{author}}" alt="">
                     <p>{{author}}</p>
                 </div>
                 <div id="prev_page"></div>
@@ -128,7 +128,7 @@
                     <div class="thoughtsbox">
                         <div class="thoughts_inp_bx">
                             {{#if exist}}<div class="usericon"
-                                style='background-image: url("http://192.168.0.143:8000/u/profiles/picture/{{data.username}}")'
+                                style='background-image: url("http://localhost:8000/u/profiles/picture/{{data.username}}")'
                                 title="{{data.username}}"></div>
                             {{else}}
                             <div class="usericon" style='background-image: url("../assets/user.webp")'
@@ -149,7 +149,7 @@
                                 <div class="thought_row">
                                     <div class="user_thought_inf">
                                         {{#if exist}}<div class="usericon"
-                                            style='background-image: url("http://192.168.0.143:8000/u/profiles/picture/{{data.username}}")'
+                                            style='background-image: url("http://localhost:8000/u/profiles/picture/{{data.username}}")'
                                             title="{{data.username}}"></div>
                                         {{/if}}
                                         <div class="thought_inf">
@@ -184,7 +184,6 @@
                         </div>
                     </div>
 
-                    <!-- Slider content -->
                     <div class="slide-content-r">
                         <div class="slide-row">
                             <div class="srchbarbx">
@@ -199,7 +198,6 @@
         </div>
     </main>
 
-    <!-- Footer -->
     <div id="fPadding"></div>
     <footer class="reele_footer-sidebar">
         <div id="sidebar-bt-bx-l" class="sidebar-bt-row">
@@ -226,6 +224,7 @@
     <script src="../js/thoughtInteract.js"></script>
     <script src="../js/characterCounter.js"></script>
     <script src="../js/thoughtGenerator.js"></script>
+    <script src="../mini-router/goBack.js"></script>
     <script src="../pdf/js/pdf.loader.document.js"></script>
     <script src="../mini-router/redirect.js"></script>
     <script src="../mini-router/routescript.js"></script>
