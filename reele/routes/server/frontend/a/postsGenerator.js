@@ -2,7 +2,7 @@ function generateFlagedPost(data, club) {
     const clubPost = document.querySelector(`#club_post_${club}`);
     const newFlagedPost = `
     <div class="post-mini-item" data-post-id data-post="${data.documentname}">
-        <div style="background-image: url('http://192.168.0.143:8000/posts/cover/${data.documentname}')" class="post-mini-cover" data-reele="${data.documentname}">
+        <div style="background-image: url('http://localhost:8000/posts/cover/${data.documentname}')" class="post-mini-cover" data-reele="${data.documentname}">
         <div id="post-mini-action-${data.postID}" class="post-mini-action la-closed-vertical">
             <div class="post-mini-action-r">
                 <p id="post-mini-title-${data.postID}"></p>

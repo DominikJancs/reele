@@ -8,7 +8,7 @@ function generateFlagedClub(data) {
         <div class="club_itemBX">
         <div class="club_item" data-club="${data.clubID}">
         <div class="clubicon-mini"
-            style='background-image: url("http://192.168.0.143:8000/c/clubprofiles/picture/${data.club}")'>
+            style='background-image: url("http://localhost:8000/c/clubprofiles/picture/${data.club}")'>
         </div>
         <p>${data.club}</p>
         <div class="line-mini"></div>

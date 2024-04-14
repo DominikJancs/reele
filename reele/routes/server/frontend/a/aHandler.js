@@ -19,7 +19,7 @@ document.addEventListener("click", (event) => {
 });
 
 function flagedPosts(e) {
-    get(`http://192.168.0.143:8000/api/flaged/posts/${e.getAttribute('data-club')}`).then((data) => {
+    get(`http://localhost:8000/api/flaged/posts/${e.getAttribute('data-club')}`).then((data) => {
         data.forEach(d => {
             generateFlagedPost(d, e.getAttribute('data-club'));
         });
@@ -27,7 +27,7 @@ function flagedPosts(e) {
 }
 
 function flagedClubs() {
-    get("http://192.168.0.143:8000/api/flaged/clubs").then((data) => {
+    get("http://localhost:8000/api/flaged/clubs").then((data) => {
         data.forEach(d => {
             generateFlagedClub(d);
         });
@@ -81,7 +81,7 @@ function acceptMethod(e, method) {
     var post_delete = document.querySelector(`.[data-post="${e}"]`);
 
     if (method == "check") {
-        postData(`http://192.168.0.143:8000/api/flaged/check/${e}`, {})
+        postData(`http://localhost:8000/api/flaged/check/${e}`, {})
         .then((response) => {
             CurrStatusCode = response.status;
             return response.json()
@@ -91,7 +91,7 @@ function acceptMethod(e, method) {
         });
     }
     else if (method == "denial") {
-        postData(`http://192.168.0.143:8000/api/flaged/delete/${e}`, {})
+        postData(`http://localhost:8000/api/flaged/delete/${e}`, {})
         .then((response) => {
             CurrStatusCode = response.status;
             return response.json()
