@@ -1,30 +1,25 @@
-// Szükséges modulok importálása
-const mysql = require("mysql2"); // MySQL modul importálása
-const setup = require("../setup"); // Beállítások importálása
-var conn = mysql.createConnection(setup.database); // MySQL kapcsolat létrehozása
+const mysql = require("mysql2"); 
+const setup = require("../setup"); 
+var conn = mysql.createConnection(setup.database); 
 
-// MySQL adatbáziskapcsolat létrehozása
 conn.connect(function (err) {
-    if (err) throw err; // Hiba esetén hibaüzenet dobása
+    if (err) throw err; 
 });
 
-// Bejegyzések lekérése
 async function getpost(req, res) {
-    // Lehetséges műfajok és szűrők
+
     var possgenre = ['classic', 'action', 'comedy', 'crime', 'drama', 'sci-fi', 'western', 'teaching', 'nature'];
     var possfilter = ['new', 'old', 'reeled'];
 
-    // Szűrők lekérése a kérésből
     var filter = req.params.filter;
     var club = req.params.club;
 
-    // "home" klub esetén
     if (club == "home") {
         if (possgenre.includes(filter)) getAllByGenre(req, res, filter);
         else if (possfilter.includes(filter));
         else getAll(req, res);
     }
-    // Egyéb klub esetén
+
     else {
         var clubID = await getClubID(club, res);
         if (possgenre.includes(filter)) getAllByGenreClub(req, res, filter, clubID);
@@ -33,7 +28,6 @@ async function getpost(req, res) {
     }
 }
 
-// Bejegyzések lekérése műfaj alapján
 async function getAllByGenre(req, res, genre) {
     var genreID = await chkGenres(conn, req, genre);
     console.log(genreID);
@@ -55,7 +49,6 @@ async function getAllByGenre(req, res, genre) {
     }
 }
 
-// Bejegyzések lekérése műfaj és klub alapján
 async function getAllByGenreClub(req, res, genre, clubid) {
     var genreID = await chkGenres(conn, req, genre);
     console.log(genreID);
@@ -77,7 +70,6 @@ async function getAllByGenreClub(req, res, genre, clubid) {
     }
 }
 
-// Összes bejegyzés lekérése
 async function getAll(req, res) {
     const sql = "SELECT author_name AS Authorname, post_title AS documentname, by_title AS byauthor, create_time AS sharetime FROM posts";
     const result = await new Promise((resolve) => {
@@ -95,7 +87,6 @@ async function getAll(req, res) {
     else res.status(404).send("Something went wrong!").json();
 }
 
-// Klub összes bejegyzésének lekérése
 async function getAllfromClub(req, res, clubid) {
     const sql = "SELECT author_name AS Authorname, post_title AS documentname, by_title AS byauthor, create_time AS sharetime FROM posts WHERE club_id = ?";
     const result = await new Promise((resolve) => {
@@ -113,7 +104,6 @@ async function getAllfromClub(req, res, clubid) {
     else res.status(404).send("Something went wrong!").json();
 }
 
-// Klub azonosítójának lekérése
 async function getClubID(clubname, res) {
     const sql = "SELECT * FROM clubs WHERE club_name = ? LIMIT 1";
     const result = await new Promise((resolve) => {
@@ -128,7 +118,6 @@ async function getClubID(clubname, res) {
     return "";
 }
 
-// Műfaj ellenőrzése
 async function chkGenres(conn, req, genre) {
     const suggGenre = genre,
         sql = "SELECT genre_id FROM genre_lib WHERE genre = ? LIMIT 1";
@@ -147,7 +136,6 @@ async function chkGenres(conn, req, genre) {
     }
 }
 
-// Reel ellenőrzése
 async function chkreel(req, posts) {
     let postData = [];
 
@@ -199,6 +187,5 @@ async function chkreel(req, posts) {
     return postData;
 }
 
-// Exportálás
-exports.getpost = getpost; // Bejegyzések lekérésének exportálása
-exports.getClubID = getClubID; // Klub azonosítójának exportálása
+exports.getpost = getpost; 
+exports.getClubID = getClubID; 

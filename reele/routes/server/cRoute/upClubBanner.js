@@ -1,89 +1,82 @@
-// Szükséges modulok importálása
-const mysql = require("mysql2"); // MySQL modul importálása
-const setup = require("../setup"); // A beállítások importálása
-const multer = require('multer'); // Fájlfeltöltés kezelése
-const pth = require('path'); // Útvonalak kezelése
-const sharp = require('sharp'); // Képek manipulálása
-var fs = require('fs'); // Fájlrendszer műveletek
-var fsExtra = require('fs-extra'); // Bővített fájlrendszer műveletek
-var conn = mysql.createConnection(setup.database); // MySQL kapcsolat létrehozása
-const storage = multer.memoryStorage(); // Fájlfeltöltés memóriatárban történő tárolása
+const mysql = require("mysql2"); 
+const setup = require("../setup"); 
+const multer = require('multer'); 
+const pth = require('path'); 
+const sharp = require('sharp'); 
+var fs = require('fs'); 
+var fsExtra = require('fs-extra'); 
+var conn = mysql.createConnection(setup.database); 
+const storage = multer.memoryStorage(); 
 
-// Fájlfeltöltés beállítása
 const upload = multer({
-    storage: storage, // Fájlfeltöltés tárolása
+    storage: storage, 
     limits: {
-        fileSize: 2 * 1024 * 1024 // Maximum 2MB méretű fájl feltöltése
+        fileSize: 2 * 1024 * 1024 
     },
     fileFilter: function (req, file, cb) {
-        chckFile(file, cb, /jpeg|jpg|png/); // Fájlfeltöltés ellenőrzése
+        chckFile(file, cb, /jpeg|jpg|png/); 
     }
 });
 
-// MySQL adatbáziskapcsolat létrehozása
 conn.connect(function (err) {
-    if (err) throw err; // Hiba esetén hibaüzenet dobása
+    if (err) throw err; 
 });
 
-// Klubbemblémák feltöltése
 async function clubBannerUp(req, res, next) {
-    const userId = req.user.userid; // Felhasználó azonosítójának lekérése
+    const userId = req.user.userid; 
 
-    const sql = "SELECT * FROM users WHERE user_id = ?"; // SQL lekérdezés előkészítése
-    conn.query(sql, [userId], (err, result) => { // SQL lekérdezés végrehajtása
-        if (err) throw err; // Hiba esetén hibaüzenet dobása
-        if (result.length > 0) { // Ha eredmény van
-            upload.single('icon')(req, res, async function (err) { // Egyetlen ikon feltöltése
-                var target_clubName = req.body.target; // Célklub névének lekérése
-                console.log(target_clubName); // Célklub névének naplózása
-                var chkAuth = chkauth(conn, target_clubName, userId); // Jogosultságok ellenőrzése
-                console.log(chkAuth); // Jogosultságok naplózása
+    const sql = "SELECT * FROM users WHERE user_id = ?"; 
+    conn.query(sql, [userId], (err, result) => { 
+        if (err) throw err; 
+        if (result.length > 0) { 
+            upload.single('icon')(req, res, async function (err) { 
+                var target_clubName = req.body.target; 
+                console.log(target_clubName); 
+                var chkAuth = chkauth(conn, target_clubName, userId); 
+                console.log(chkAuth); 
 
-                if (chkAuth) { // Ha jogosultságok rendben vannak
-                    var dir = `media/clubs/club_banners/${target_clubName}`; // Mappa elérési útjának meghatározása
-                    if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true }); // Ha a mappa nem létezik, létrehozása
-                    else fsExtra.emptyDirSync(dir); // Mappa tartalmának törlése
+                if (chkAuth) { 
+                    var dir = `media/clubs/club_banners/${target_clubName}`; 
+                    if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true }); 
+                    else fsExtra.emptyDirSync(dir); 
 
-                    const fileName = `${target_clubName}_${Date.now()}.png`; // Fájlnév készítése
-                    await sharp(req.file.buffer).png().resize({ width: 512, height: 256 }).toFile(`media/clubs/club_banners/${target_clubName}/${fileName}`); // Fájl manipuláció
-                    const iconPth = `media/clubs/club_banners/${target_clubName}/${fileName}`; // Fájl elérési útjának meghatározása
+                    const fileName = `${target_clubName}_${Date.now()}.png`; 
+                    await sharp(req.file.buffer).png().resize({ width: 512, height: 256 }).toFile(`media/clubs/club_banners/${target_clubName}/${fileName}`); 
+                    const iconPth = `media/clubs/club_banners/${target_clubName}/${fileName}`; 
 
-                    const sql = "UPDATE clubs SET banner_path = ? WHERE club_name = ?"; // SQL lekérdezés előkészítése
-                    conn.query(sql, [iconPth, target_clubName], (err, result) => { // SQL lekérdezés végrehajtása
+                    const sql = "UPDATE clubs SET banner_path = ? WHERE club_name = ?"; 
+                    conn.query(sql, [iconPth, target_clubName], (err, result) => { 
 
                     });
-                    (req.finalize = true, next()); // Végezetül hívjuk a következő middleware-t
+                    (req.finalize = true, next()); 
                 }
             });
         }
     });
 }
 
-// Jogosultságok ellenőrzése
 async function chkauth(conn, clubname, userid) {
-    const sql = "SELECT * FROM clubs WHERE club_name = ? LIMIT 1"; // SQL lekérdezés előkészítése
-    const result = await new Promise((resolve) => { // Várakoztatás
-        conn.query(sql, [clubname], (err, res) => { // SQL lekérdezés végrehajtása
+    const sql = "SELECT * FROM clubs WHERE club_name = ? LIMIT 1"; 
+    const result = await new Promise((resolve) => { 
+        conn.query(sql, [clubname], (err, res) => { 
             resolve(res)
         });
     });
-    if (result.length > 0) { // Ha eredmény van
-        var admin_id = result[0].club_admin; // Klubadminisztrátor azonosítójának lekérése
-        if (admin_id == userid) return true; // Ha a felhasználó klubadminisztrátor, visszatérés igazzal
-        else return false; // Egyébként visszatérés hamissal
+    if (result.length > 0) { 
+        var admin_id = result[0].club_admin; 
+        if (admin_id == userid) return true; 
+        else return false; 
     }
-    else return false; // Egyébként visszatérés hamissal
+    else return false; 
 }
 
-// Fájltípus ellenőrzése
 function chckFile(file, cb, ext) {
-    const filename = file.originalname; // Eredeti fájlnév lekérése
-    const extension = ext.test(pth.extname(filename).toLowerCase()); // Fájlkiterjesztés ellenőrzése
-    const mime = ext.test(file.mimetype); // MIME típus ellenőrzése
+    const filename = file.originalname; 
+    const extension = ext.test(pth.extname(filename).toLowerCase()); 
+    const mime = ext.test(file.mimetype); 
 
-    if (extension && mime && filename.length > 0) return cb(null, true); // Ha a feltételek teljesülnek, hívjuk a callback függvényt
-    else cb(new Error("The file isn't an image")); // Egyébként hibaüzenet dobása
+    if (extension && mime && filename.length > 0) return cb(null, true); 
+    else cb(new Error("The file isn't an image")); 
 }
 
-// Exportálás
-exports.clubBannerUp = clubBannerUp; // Klubbemblémák feltöltésének exportálása
+exports.clubBannerUp = clubBannerUp; 

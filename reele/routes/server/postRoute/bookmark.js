@@ -1,51 +1,47 @@
-// Szükséges modulok importálása
-const mysql = require("mysql2"); // MySQL modul importálása
-const setup = require("../setup"); // Beállítások importálása
-var conn = mysql.createConnection(setup.database); // MySQL kapcsolat létrehozása
+const mysql = require("mysql2"); 
+const setup = require("../setup"); 
+var conn = mysql.createConnection(setup.database); 
 
-// MySQL adatbáziskapcsolat létrehozása
 conn.connect(function (err) {
-    if (err) throw err; // Hiba esetén hibaüzenet dobása
+    if (err) throw err; 
 });
 
-// Könyvjelző létrehozása
 async function createbookmark(req, res) {
-    var postTitle = req.params.post; // Bejegyzés címének lekérése a paraméterekből
-    var page = req.body.page, // Oldalszám lekérése a kéréstől
-        userid = req.user.userid; // Felhasználó azonosítójának lekérése
+    var postTitle = req.params.post; 
+    var page = req.body.page, 
+        userid = req.user.userid; 
 
-    const sql = "SELECT * FROM posts WHERE post_title = ? LIMIT 1"; // SQL lekérdezés előkészítése
-    const result = await new Promise((resolve) => { // Várakoztatás
-        conn.query(sql, [postTitle], (err, res) => { // SQL lekérdezés végrehajtása
+    const sql = "SELECT * FROM posts WHERE post_title = ? LIMIT 1"; 
+    const result = await new Promise((resolve) => { 
+        conn.query(sql, [postTitle], (err, res) => { 
             resolve(res)
         });
     });
-    if (result.length > 0) { // Ha eredmény van
-        const sqlm = "SELECT * FROM bookmarks WHERE user_id = ? AND post_id = ? AND b_page_pin = ? LIMIT 1"; // SQL lekérdezés előkészítése
-        var post_id = result[0].post_id; // Bejegyzés azonosítójának lekérése
+    if (result.length > 0) { 
+        const sqlm = "SELECT * FROM bookmarks WHERE user_id = ? AND post_id = ? AND b_page_pin = ? LIMIT 1"; 
+        var post_id = result[0].post_id; 
 
-        const result2 = await new Promise((resolve) => { // Várakoztatás
-            conn.query(sqlm, [userid, post_id, page], (err, res) => { // SQL lekérdezés végrehajtása
+        const result2 = await new Promise((resolve) => { 
+            conn.query(sqlm, [userid, post_id, page], (err, res) => { 
                 resolve(res)
             });
         });
-        if (result2.length > 0) { // Ha már létezik könyvjelző
-            const del = 'DELETE FROM bookmarks WHERE user_id = ? AND post_id = ? AND b_page_pin = ?'; // SQL törlési parancs előkészítése
-            conn.query(del, [userid, post_id, page], (err, result) => { // SQL törlési parancs végrehajtása
-                if (err) throw err; // Hiba esetén hibaüzenet dobása
+        if (result2.length > 0) { 
+            const del = 'DELETE FROM bookmarks WHERE user_id = ? AND post_id = ? AND b_page_pin = ?'; 
+            conn.query(del, [userid, post_id, page], (err, result) => { 
+                if (err) throw err; 
             });
-            res.status(201).json({ class: "bookmark" }); // Státusz küldése
+            res.status(201).json({ class: "bookmark" }); 
         }
-        else { // Ha még nem létezik könyvjelző
-            const comm = 'INSERT INTO bookmarks(user_id, post_id, b_page_pin) values(?,?,?)'; // SQL beszúrási parancs előkészítése
-            conn.query(comm, [userid, post_id, page], (err, result) => { // SQL beszúrási parancs végrehajtása
-                if (err) throw err; // Hiba esetén hibaüzenet dobása
+        else { 
+            const comm = 'INSERT INTO bookmarks(user_id, post_id, b_page_pin) values(?,?,?)'; 
+            conn.query(comm, [userid, post_id, page], (err, result) => { 
+                if (err) throw err; 
             });
-            res.status(201).json({ class: "bookmark marked" }); // Státusz küldése
+            res.status(201).json({ class: "bookmark marked" }); 
         }
     }
-    else res.status(500).json({ msg: "Something went wrong!" }); // Egyébként hibaüzenet küldése
+    else res.status(500).json({ msg: "Something went wrong!" }); 
 }
 
-// Exportálás
-exports.createbookmark = createbookmark; // Könyvjelző létrehozásának exportálása
+exports.createbookmark = createbookmark; 

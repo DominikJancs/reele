@@ -7,12 +7,10 @@ conn.connect(function (err) {
     if (err) throw err;
 });
 
-// Klub hitelesítési middleware függvény
 async function clubAuth(req, res, next) {
     var clubName = req.params.club;
     userid = req.user.userid;
 
-    //Clubból a felhasználók kiválasztása club név szerint
     const sql = "SELECT * FROM clubs WHERE club_name = ? LIMIT 1";
     const result = await new Promise((resolve) => {
         conn.query(sql, [clubName], (err, res) => {
@@ -20,7 +18,7 @@ async function clubAuth(req, res, next) {
         });
     });
     if (result.length > 0) {
-        //Az adott csatlakozás kiválasztása és ellenőzése
+
         const sqlm = "SELECT * FROM joins WHERE user_id = ? AND club_id = ? LIMIT 1";
         var club_id = result[0].club_id,
             club_admin = result[0].club_admin,

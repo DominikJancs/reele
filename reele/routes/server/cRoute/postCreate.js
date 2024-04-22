@@ -1,4 +1,3 @@
-// Szükséges modulok importálása
 const mysql = require("mysql2");
 const setup = require("../setup");
 const multer = require('multer');
@@ -7,46 +6,39 @@ const sharp = require('sharp');
 var fs = require('fs');
 var fsExtra = require('fs-extra');
 
-// Adatbázis kapcsolat létrehozása
 var conn = mysql.createConnection(setup.database);
 
-// Multer konfigurációja a fájlok feltöltéséhez
 const storage = multer.memoryStorage();
 const upload = multer({
     storage: storage,
     limits: {
-        fileSize: 2 * 1024 * 1024 // 2MB a maximális fájlméret
+        fileSize: 2 * 1024 * 1024 
     }
 });
 
-// Adatbázis kapcsolat ellenőrzése
 conn.connect(function (err) {
-    if (err) throw err; // Hiba esetén dob egy hibát
+    if (err) throw err; 
 });
 
-// Új bejegyzés létrehozása
 async function postCreate(req, res, next) {
-    const userId = req.user.userid, // Felhasználó azonosítója
-          userName = req.user.username, // Felhasználó neve
-          clubId = req.club.clubid; // Klub azonosítója
+    const userId = req.user.userid, 
+          userName = req.user.username, 
+          clubId = req.club.clubid; 
 
-    // Fájlok feltöltése és feldolgozása
     upload.fields([{ name: 'cover', maxCount: 1 }, { name: 'file', maxCount: 1 }])(req, res, async function (err) {
-        var chkAuth = await chkauth(conn, req.club.clubname, userId); // Jogosultság ellenőrzése
-        var data = req.body.data.split(","); // Adatainak feldolgozása
-        var chkExist = await chkexist(conn, data[0]); // Létezés ellenőrzése
-        var chkGenre = await chkGenres(conn, req, data); // Műfaj ellenőrzése
+        var chkAuth = await chkauth(conn, req.club.clubname, userId); 
+        var data = req.body.data.split(","); 
+        var chkExist = await chkexist(conn, data[0]); 
+        var chkGenre = await chkGenres(conn, req, data); 
 
-        // Ha minden ellenőrzés sikeres
         if (chkAuth && chkGenre.value && chkExist) {
-            // Könyvtárak létrehozása, ha nem léteznek
+
             var dir = `media/clubs/club_documents/covers/${req.club.clubname}`;
             if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
 
             var dir2 = `media/clubs/club_documents/documents/${req.club.clubname}`;
             if (!fs.existsSync(dir2)) fs.mkdirSync(dir2, { recursive: true });
 
-            // Borító fájl ellenőrzése és feldolgozása
             var chkCover = chckFile(req.files['cover'][0], /jpeg|jpg|png/);
             const coverFileName = `${req.club.clubname}_${Date.now()}.png`;
             const coverPth = `media/clubs/club_documents/covers/${req.club.clubname}/${coverFileName}`;
@@ -54,7 +46,6 @@ async function postCreate(req, res, next) {
                 await sharp(req.files['cover'][0].buffer).png().resize({ width: 356, height: 512 }).toFile(`media/clubs/club_documents/covers/${req.club.clubname}/${coverFileName}`);
             }
 
-            // Dokumentum fájl ellenőrzése és mentése
             var chkDocument = chckFile(req.files['file'][0], /pdf/);
             const documentFileName = `${req.club.clubname}_${Date.now()}.pdf`;
             const documentPth = `media/clubs/club_documents/documents/${req.club.clubname}/${documentFileName}`;
@@ -62,7 +53,6 @@ async function postCreate(req, res, next) {
                 fs.writeFileSync(documentPth, req.files['file'][0].buffer);
             }
 
-            // Bejegyzés mentése az adatbázisba
             var postFinalizeChk = await postFinalize(userId, userName, data[0], data[1], data[3], coverPth, documentPth, chkGenre.genreID, clubId);
 
             if (postFinalizeChk) (req.finalize = true, next());
@@ -76,10 +66,9 @@ async function postCreate(req, res, next) {
     });
 }
 
-// Bejegyzés végső mentése az adatbázisba
 async function postFinalize(authorid, authorname, posttitle, bytitle, pageindex, coverpth, filepth, genreid, clubid) {
     try {
-        // SQL lekérdezés futtatása a bejegyzés létrehozására
+
         const comm = 'INSERT INTO posts(author_id, author_name, post_title, by_title, page_index, cover_path, file_path, genre_id, club_id) values(?,?,?,?,?,?,?,?,?)';
         conn.query(comm, [authorid, authorname, posttitle, bytitle, pageindex, coverpth, filepth, genreid, clubid], (err, result) => {
             if (err) {
@@ -96,7 +85,6 @@ async function postFinalize(authorid, authorname, posttitle, bytitle, pageindex,
     }
 }
 
-// Jogosultság ellenőrzése
 async function chkauth(conn, clubname, userid) {
     const sql = "SELECT * FROM clubs WHERE club_name = ? LIMIT 1";
     const result = await new Promise((resolve) => {
@@ -112,7 +100,6 @@ async function chkauth(conn, clubname, userid) {
     else return false;
 }
 
-// Létezés ellenőrzése
 async function chkexist(conn, posttitle) {
     const sql = "SELECT * FROM posts WHERE LOWER(post_title) = ?";
     const result = await new Promise((resolve) => {
@@ -124,7 +111,6 @@ async function chkexist(conn, posttitle) {
     else return true;
 }
 
-// Műfaj ellenőrzése
 async function chkGenres(conn, req, data) {
     const suggGenre = data[2],
           sql = "SELECT genre_id FROM genre_lib WHERE genre = ?";
@@ -157,7 +143,6 @@ async function chkGenres(conn, req, data) {
     }
 }
 
-// Fájl ellenőrzése
 function chckFile(file, ext) {
     const filename = file.originalname;
     const extension = ext.test(pth.extname(filename).toLowerCase());
@@ -167,5 +152,4 @@ function chckFile(file, ext) {
     else return false;
 }
 
-// Függvény exportálása
 exports.postCreate = postCreate;

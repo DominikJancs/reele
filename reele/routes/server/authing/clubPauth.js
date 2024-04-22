@@ -10,7 +10,6 @@ conn.connect(function (err) {
 async function clubPauth(req, res, next) {
     var clubName = req.params.club;
 
-    //Clubból a felhasználók kiválasztása club név szerint
     const sql = "SELECT * FROM clubs WHERE club_name = ? LIMIT 1";
     const result = await new Promise((resolve) => {
         conn.query(sql, [clubName], (err, res) => {

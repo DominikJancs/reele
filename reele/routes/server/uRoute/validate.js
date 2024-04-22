@@ -1,41 +1,36 @@
-const validator = require("email-validator"); // Importáljuk az email-validator csomagot az email címek ellenőrzéséhez
-const passvalid = require("./passvalidation"); // Importáljuk a passvalidation modult a jelszó ellenőrzéséhez
+const validator = require("email-validator"); 
+const passvalid = require("./passvalidation"); 
 
-// Az aszinkron validációs funkció
 async function validation(req, res, next) {
-    let checkany = null; // Ellenőrzési változó inicializálása
-    var formType = req.body.form; // Űrlap típusának kinyerése a kérésből
+    let checkany = null; 
+    var formType = req.body.form; 
 
-    // Ha bejelentkezési űrlapról van szó
     if (formType === "login") {
-        checkany = await checkLog(req); // Ellenőrizzük a bejelentkezési adatokat
+        checkany = await checkLog(req); 
     }
-    // Ha regisztrációs űrlapról van szó
+
     else if (formType === "signup") {
-        checkany = await checkSign(req); // Ellenőrizzük a regisztrációs adatokat
+        checkany = await checkSign(req); 
     }
     else {
-        return res.status(400).send("Something went wrong!"); // Ha ismeretlen űrlap típus érkezik, hibát küldünk
+        return res.status(400).send("Something went wrong!"); 
     }
 
-    if (checkany) next(); // Ha az ellenőrzés sikeres, továbblépünk a következő middleware-hez
+    if (checkany) next(); 
 }
 
-// Az aszinkron funkció, ami a bejelentkezési adatokat ellenőrzi
 async function checkLog(data) {
-    let checkData = true; // Alapértelmezett érték: igaz
-    // Ha valamelyik adat hiányzik vagy nem megfelelő a formátuma, vagy a jelszó hossza nem megfelelő
+    let checkData = true; 
+
     if (!(data.body.email && data.body.password && validator.validate(data.body.email) && await passvalid.password(data.body.password)) && data.body.password.length < 6 || data.body.password.length > 30) checkData = false;
-    return checkData; // Az ellenőrzési eredményt visszaadjuk
+    return checkData; 
 }
 
-// Az aszinkron funkció, ami a regisztrációs adatokat ellenőrzi
 async function checkSign(data) {
-    let checkData = true; // Alapértelmezett érték: igaz
-    // Ha valamelyik adat hiányzik vagy nem megfelelő a formátuma, vagy a jelszavak nem egyeznek, vagy a jelszó hossza nem megfelelő
+    let checkData = true; 
+
     if (!(data.body.username && data.body.email && data.body.password && data.body.confirmPassword && validator.validate(data.body.email) && await passvalid.password(data.body.password)) && data.body.password !== data.body.confirmPassword && data.body.password.length < 6 || data.body.password.length > 30) checkData = false;
-    return checkData; // Az ellenőrzési eredményt visszaadjuk
+    return checkData; 
 }
 
-// Az exporthoz rendeljük a validation függvényt
 exports.validation = validation;

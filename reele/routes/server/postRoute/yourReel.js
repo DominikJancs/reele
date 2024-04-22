@@ -1,21 +1,17 @@
-// Szükséges modulok importálása
-const mysql = require("mysql2"); // MySQL modul importálása
-const setup = require("../setup"); // Beállítások importálása
-const getPost = require("./getPOST"); // getPOST modul importálása
-var conn = mysql.createConnection(setup.database); // MySQL kapcsolat létrehozása
+const mysql = require("mysql2"); 
+const setup = require("../setup"); 
+const getPost = require("./getPOST"); 
+var conn = mysql.createConnection(setup.database); 
 
-// MySQL adatbáziskapcsolat létrehozása
 conn.connect(function (err) {
-    if (err) throw err; // Hiba esetén hibaüzenet dobása
+    if (err) throw err; 
 });
 
-// Felhasználó Reeljeinek lekérése
 async function yourreel(req, res) {
     var club = req.params.club,
         posts = [],
         reeles = await getReeles(req);
 
-    // Ha a klub "home", akkor minden bejegyzés lekérése
     if (club == "home") {
         for (let i = 0; i < reeles.length; i++) {
             const sql = "SELECT post_title AS documentname FROM posts WHERE post_id = ?";
@@ -33,7 +29,7 @@ async function yourreel(req, res) {
             }
         }
     }
-    // Különben csak a megadott klubhoz tartozó bejegyzések lekérése
+
     else {
         var clubID = await getPost.getClubID(club, res);
 
@@ -53,10 +49,9 @@ async function yourreel(req, res) {
             }
         }
     }
-    res.status(201).json(posts); // Eredmény visszaküldése JSON formátumban
+    res.status(201).json(posts); 
 }
 
-// Reeljeinek lekérdezése a felhasználóhoz tartozó bejegyzésekből
 async function getReeles(req) {
     const sql = "SELECT post_id FROM reeles WHERE user_id = ?";
     const result = await new Promise((resolve) => {
@@ -73,5 +68,4 @@ async function getReeles(req) {
     }
 }
 
-// Exportálás
-exports.yourreel = yourreel; // Felhasználó Reeljeinek lekérdezése exportálása
+exports.yourreel = yourreel; 

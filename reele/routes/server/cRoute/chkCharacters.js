@@ -1,38 +1,31 @@
-// Maximum 255 karakter hosszúság ellenőrző middleware függvény
 async function charaterChk255(req, res, next) {
-    const descriptL = req.body.clubdesc.length; // A klub leírásának hossza
+    const descriptL = req.body.clubdesc.length; 
 
-    // Ha a leírás hossza 255 karakteren belül van
     if (descriptL <= 255) {
-        req.des = true; // Leírás elfogadva
-        next(); // Következő middleware-re továbbítás
+        req.des = true; 
+        next(); 
     } else {
-        req.des = false; // Leírás túl hosszú
-        next(); // Következő middleware-re továbbítás
+        req.des = false; 
+        next(); 
     }
 }
 
-// Minimum 3 és maximum 6 karakter hosszúságú librák ellenőrző middleware függvény
 async function LcharaterChk3to6(req, res, next) {
-    const libras = req.body.libras; // Librák tömbje a kérésből
-    var libraChk = false; // Librák ellenőrzésének eredménye (alapértelmezett: hamis)
+    const libras = req.body.libras; 
+    var libraChk = false; 
 
-    // Ha a librák száma kevesebb, mint 2 vagy több, mint 6
     if (libras.length < 2 || libras.length > 6) libraChk = true;
 
-    // Minden libra ellenőrzése
     libras.forEach(libra => {
-        if (libra.length > 25) libraChk = true; // Ha egy libra több, mint 25 karakter
+        if (libra.length > 25) libraChk = true; 
     });
 
-    // Ha van probléma a librák valamelyikével
     if (libraChk) {
-        res.status(500).json({ msg: "Something went wrong!" }); // Hibaüzenet küldése
+        res.status(500).json({ msg: "Something went wrong!" }); 
     } else {
-        next(); // Következő middleware-re továbbítás
+        next(); 
     }
 }
 
-// Middleware függvények exportálása
 exports.charaterChk255 = charaterChk255;
 exports.LcharaterChk3to6 = LcharaterChk3to6;

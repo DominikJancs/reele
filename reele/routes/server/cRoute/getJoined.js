@@ -1,38 +1,38 @@
-const mysql = require("mysql2"); // MySQL modul importálása
-const setup = require("../setup"); // Beállítások modul importálása
-var conn = mysql.createConnection(setup.database); // Adatbázis kapcsolat létrehozása
+const mysql = require("mysql2"); 
+const setup = require("../setup"); 
+var conn = mysql.createConnection(setup.database); 
 
-conn.connect(function (err) { // Adatbázis kapcsolat ellenőrzése
+conn.connect(function (err) { 
     if (err) throw err;
 });
 
-async function getjoin(req, res) { // Felhasználó csatlakozásainak lekérdezése
-    var userid = req.user.userid; // Felhasználó azonosítójának meghatározása
+async function getjoin(req, res) { 
+    var userid = req.user.userid; 
 
-    const sql = "SELECT club_id FROM joins WHERE user_id= ?"; // SQL lekérdezés az adott felhasználó csatlakozásainak lekérdezéséhez
-    const result = await new Promise((resolve) => { // Promise létrehozása az aszinkron lekérdezéshez
-        conn.query(sql, [userid], (err, res) => { // Adatbázis lekérdezés végrehajtása
-            resolve(res); // Eredmény visszatérése a promisal
+    const sql = "SELECT club_id FROM joins WHERE user_id= ?"; 
+    const result = await new Promise((resolve) => { 
+        conn.query(sql, [userid], (err, res) => { 
+            resolve(res); 
         });
     });
-    if (result.length > 0) { // Ha vannak eredmények
-        let clubData = []; // Klub adatok tömbjének inicializálása
-        const sqlm = "SELECT club_name AS club FROM clubs WHERE club_id = ?"; // SQL lekérdezés a klub nevének lekérdezéséhez
+    if (result.length > 0) { 
+        let clubData = []; 
+        const sqlm = "SELECT club_name AS club FROM clubs WHERE club_id = ?"; 
 
-        for (let i = 0; i < result.length; i++) { // Eredmények feldolgozása
-            const result2 = await new Promise((resolve) => { // Promise létrehozása az aszinkron lekérdezéshez
-                conn.query(sqlm, [result[i].club_id], (err, res) => { // Adatbázis lekérdezés végrehajtása
-                    resolve(res); // Eredmény visszatérése a promisal
+        for (let i = 0; i < result.length; i++) { 
+            const result2 = await new Promise((resolve) => { 
+                conn.query(sqlm, [result[i].club_id], (err, res) => { 
+                    resolve(res); 
                 });
             });
-            if (result2.length > 0) { // Ha vannak eredmények
-                clubData.push(result2[0]); // Klub adatok tömbjének frissítése
+            if (result2.length > 0) { 
+                clubData.push(result2[0]); 
             }
-            else res.status(500).json({ msg: "Something went wrong!" }); // Hibaüzenet küldése, ha valami nem stimmel
+            else res.status(500).json({ msg: "Something went wrong!" }); 
         }
-        res.status(201).json(clubData); // Klub adatok JSON formátumban történő visszatérése
+        res.status(201).json(clubData); 
     }
-    else res.status(500).json({ msg: "Something went wrong!" }); // Hibaüzenet küldése, ha valami nem stimmel
+    else res.status(500).json({ msg: "Something went wrong!" }); 
 }
 
-exports.getjoin = getjoin; // Az exportálás meghatározása
+exports.getjoin = getjoin; 
