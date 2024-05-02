@@ -80,15 +80,16 @@ CREATE TABLE IF NOT EXISTS tag_log (
 CREATE TABLE IF NOT EXISTS posts (
     post_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     author_id INT NOT NULL,
-    author_name VARCHAR(50) NOT NULL,
     post_title VARCHAR(255) NOT NULL,
     by_title VARCHAR(50) NOT NULL,
     create_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    page_index INT NOT NULL,
+    author_name VARCHAR(50) NOT NULL,
     cover_path VARCHAR(255) NOT NULL,
     file_path VARCHAR(255) NOT NULL,
     genre_id INT NOT NULL,
     club_id INT NOT NULL
-) Engine=Innodb;  
+) Engine=Innodb; 
 
 CREATE TABLE IF NOT EXISTS clubs (
     club_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -122,87 +123,38 @@ CREATE TABLE IF NOT EXISTS genre_lib (
     genre VARCHAR(255) NOT NULL
 ) Engine=Innodb;  
 
-
---modificated
-
-CREATE TABLE IF NOT EXISTS posts (
-    post_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    author_id INT NOT NULL,
-    post_title VARCHAR(255) NOT NULL,
-    by_title VARCHAR(50) NOT NULL,
-    create_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    page_index INT NOT NULL,
-    author_name VARCHAR(50) NOT NULL,
-    cover_path VARCHAR(255) NOT NULL,
-    file_path VARCHAR(255) NOT NULL,
-    genre_id INT NOT NULL,
-    club_id INT NOT NULL
-) Engine=Innodb;  
-
-------------------------------------------------------------------------------------------------------------------------------------------------
-
-/* vote_log */
 ALTER TABLE vote_log ADD FOREIGN KEY (user_id) REFERENCES users (user_id);
 ALTER TABLE vote_log ADD FOREIGN KEY (thought_id) REFERENCES thoughts (thought_id);
 
-/* bookmarks */
 ALTER TABLE bookmarks ADD FOREIGN KEY (user_id) REFERENCES users (user_id);
 ALTER TABLE bookmarks ADD FOREIGN KEY (post_id) REFERENCES posts (post_id);
 
-/* joins */
 ALTER TABLE joins ADD FOREIGN KEY (user_id) REFERENCES users (user_id);
 ALTER TABLE joins ADD FOREIGN KEY (club_id) REFERENCES clubs (club_id);
 
-/* views */
 ALTER TABLE views ADD FOREIGN KEY (user_id) REFERENCES users (user_id);
 ALTER TABLE views ADD FOREIGN KEY (post_id) REFERENCES posts (post_id);
 
-/* reeles */
 ALTER TABLE reeles ADD FOREIGN KEY (user_id) REFERENCES users (user_id);
 ALTER TABLE reeles ADD FOREIGN KEY (post_id) REFERENCES posts (post_id);
 
-/* thoughts */
 ALTER TABLE thoughts ADD FOREIGN KEY (post_id) REFERENCES posts (post_id);
 ALTER TABLE thoughts ADD FOREIGN KEY (user_id) REFERENCES users (user_id);
 
-/* tag_log */
 ALTER TABLE tag_log ADD FOREIGN KEY (tag_id) REFERENCES tag_lib (tag_id);
 ALTER TABLE tag_log ADD FOREIGN KEY (post_id) REFERENCES posts (post_id);
 
-/* posts */
 ALTER TABLE posts ADD FOREIGN KEY (author_id) REFERENCES users (user_id);
 ALTER TABLE posts ADD FOREIGN KEY (genre_id) REFERENCES genre_log (g_cast_id);
 ALTER TABLE posts ADD FOREIGN KEY (club_id) REFERENCES clubs (club_id);
 
-/* clubs */
 ALTER TABLE clubs ADD FOREIGN KEY (club_admin) REFERENCES users (user_id);
 
-/* libra_log */
 ALTER TABLE libra_log ADD FOREIGN KEY (club_id) REFERENCES clubs (club_id);
 ALTER TABLE libra_log ADD FOREIGN KEY (libra_id) REFERENCES libra_lib (libra_id);
 
-
-/* genre_log */
 ALTER TABLE genre_log ADD FOREIGN KEY (genre_id) REFERENCES genre_lib (genre_id);
 ALTER TABLE genre_log ADD FOREIGN KEY (club_id) REFERENCES clubs (club_id);
-
-------------------------------------------------------------------------------------------------------------------------------------------------
-
-DELIMITER //
-
-CREATE TRIGGER insertUser BEFORE INSERT on User For Each Row
-BEGIN
-    SET NEW.password = sha2(NEW.password,256);
-END//
-
-DELIMITER;
-
-------------------------------------------------------------------------------------------------------------------------------------------------
-
---Values
-
---INSERT (club_name, )
-
 
 INSERT INTO
     admins (email, admin_name, password)
@@ -221,19 +173,3 @@ VALUES
     (7, 'western'),
     (8, 'teaching'),
     (9, 'nature');
-
-INSERT INTO
-    genre_lib (genre_id, genre)
-VALUES
-    (1, 'classic' ),
-    (2, 'action'),
-    (3, 'comedy'),
-    (4, 'crime'),
-    (5, 'drama'),
-    (6, 'sci-fi'),
-    (7, 'western'),
-    (8, 'teaching'),
-    (9, 'nature');
-
-INSERT users (user_id, email, password) 
-    VALUES
