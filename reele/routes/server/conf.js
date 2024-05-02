@@ -26,7 +26,7 @@ const cookieParser = require('cookie-parser');
 var express = require('express'); 
 var appl = express(); 
 appl.use(cors({ 
-    origin: [`http://192.168.0.143:${setup.port}`],
+    origin: [`http://localhost:${setup.port}`],
     methods: ["GET", "POST"], 
     credentials: true
 }));
